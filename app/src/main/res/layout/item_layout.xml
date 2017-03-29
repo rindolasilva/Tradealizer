@@ -6,7 +6,8 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Person"
+        android:hint="@string/person_string"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Person"
@@ -17,7 +18,8 @@
         app:layout_constraintLeft_toLeftOf="@+id/ID_Adresse" />
 
     <TextView
-        android:text="Adresse"
+        android:hint="@string/adresse_string"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Adresse"
@@ -27,7 +29,8 @@
         app:layout_constraintLeft_toLeftOf="@+id/ID_Ort" />
 
     <TextView
-        android:text="Ort"
+        android:hint="@string/ort_string"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Ort"
@@ -38,7 +41,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/puffer2" />
 
     <TextView
-        android:text="Kosten"
+        android:hint="@string/kosten_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Kosten"
@@ -49,7 +52,7 @@
         android:layout_marginTop="8dp" />
 
     <TextView
-        android:text="Datum"
+        android:hint="@string/datum_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Datum"
@@ -59,7 +62,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/ID_Kosten" />
 
     <TextView
-        android:text="----"
+        android:hint="----"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/puffer"
@@ -70,7 +73,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/ID_Datum" />
 
     <TextView
-        android:text="Art"
+        android:hint="@string/art_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Art"
@@ -80,7 +83,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/puffer" />
 
     <TextView
-        android:text="Kostenart"
+        android:hint="@string/kostenart_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Kostenart"
@@ -91,7 +94,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/ID_Art" />
 
     <TextView
-        android:text="----"
+        android:hint="----"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/puffer2"
@@ -101,14 +104,15 @@
         app:layout_constraintLeft_toLeftOf="@+id/ID_Kostenart" />
 
     <TextView
-        android:text="Beschreibung"
-        android:layout_width="258dp"
-        android:layout_height="157dp"
+        android:hint="@string/beschreibung_string"
+        android:layout_width="276dp"
+        android:layout_height="156dp"
         android:id="@+id/ID_Beschreibung"
 
         android:inputType="textMultiLine"
-        tools:layout_editor_absoluteY="8dp"
         android:layout_marginStart="48dp"
         app:layout_constraintLeft_toRightOf="@+id/ID_Kosten"
-        android:layout_marginLeft="48dp" />
+        android:layout_marginLeft="48dp"
+        app:layout_constraintTop_toTopOf="@+id/ID_Kosten"
+        app:layout_constraintBottom_toBottomOf="@+id/ID_Person" />
 </android.support.constraint.ConstraintLayout>

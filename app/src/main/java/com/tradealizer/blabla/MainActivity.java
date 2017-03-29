@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new AllesDBHandler(this, null, null, 1);
         printDatabase();
         Log.d(TAG, "Vor populate ");
-        populateListView();
+        //populateListView();
+        //populateListView2();
+        populateListView3();
     }
 
     @Override
@@ -71,13 +73,17 @@ public class MainActivity extends AppCompatActivity {
         Alles alles = new Alles(Integer.parseInt(myInput.getText().toString()),myBeschreibung.getText().toString());
         dbHandler.addProduct(alles);
         printDatabase();
-        populateListView();
+        //populateListView();
+        //populateListView2();
+        populateListView3();
     }
     public void deleteButtonClicked(View v){
         String inputText = myInput.getText().toString();
         dbHandler.deleteProduct(inputText);
         printDatabase();
-        populateListView();
+        //populateListView();
+        //populateListView2();
+        populateListView3();
     }
 
     public void printDatabase(){
@@ -96,6 +102,39 @@ public class MainActivity extends AppCompatActivity {
         SimpleCursorAdapter cursorAdapter;
         Log.d(TAG, "Vor adapter instanz ");
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout,cursor,from,to,0);
+        Log.d(TAG, "Vor listview instanz ");
+        GridView listv = (GridView) findViewById(R.id.listView);
+
+        listv.setEmptyView(findViewById(R.id.ID_Kostenart));
+
+        Log.d(TAG, "Vor set adapter ");
+        listv.setAdapter(cursorAdapter);
+        Log.d(TAG, "alles gut gelaufen ");
+    }
+    private void populateListView2(){
+        Log.d(TAG, "Vor cursor ");
+        Cursor cursor = dbHandler.getAllRows();
+        Log.d(TAG, "Vor arrays und adapter ");
+        String[] from = new String[] {AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
+        int[] to = new int[] {R.id.ID_Kosten_kosten, R.id.ID_Beschreibung_kosten };
+        SimpleCursorAdapter cursorAdapter;
+        Log.d(TAG, "Vor adapter instanz ");
+        cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_kosten,cursor,from,to,0);
+        Log.d(TAG, "Vor listview instanz ");
+        GridView listv = (GridView) findViewById(R.id.listView);
+        Log.d(TAG, "Vor set adapter ");
+        listv.setAdapter(cursorAdapter);
+        Log.d(TAG, "alles gut gelaufen ");
+    }
+    private void populateListView3(){
+        Log.d(TAG, "Vor cursor ");
+        Cursor cursor = dbHandler.getAllRows();
+        Log.d(TAG, "Vor arrays und adapter ");
+        String[] from = new String[] {AllesDBHandler.COLUMN_Kosten};
+        int[] to = new int[] {R.id.ID_Kosten_pur };
+        SimpleCursorAdapter cursorAdapter;
+        Log.d(TAG, "Vor adapter instanz ");
+        cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_pur,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
         GridView listv = (GridView) findViewById(R.id.listView);
         Log.d(TAG, "Vor set adapter ");

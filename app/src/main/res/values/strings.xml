@@ -2,4 +2,15 @@
     <string name="app_name">Blabla</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string name="kosten_string">Kosten</string>
+    <string name="beschreibung_string">Beschreibung</string>
+    <string name="datum_string">Datum</string>
+    <string name="kostenart_string">Kostenart</string>
+    <string name="art_string">Art</string>
+    <string name="ort_string">Ort</string>
+    <string name="adresse_string">Adresse</string>
+    <string name="person_string">Person</string>
+
+
 </resources>
