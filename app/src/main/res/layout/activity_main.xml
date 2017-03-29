@@ -91,21 +91,11 @@
 
     <GridView
         android:layout_width="match_parent"
-        android:id="@+id/listView"
-
-        android:layout_marginBottom="16dp"
-        android:layout_above="@+id/tv_gesamtkosten"
-        android:layout_centerHorizontal="true"
-        android:layout_height="300dp"
-
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"/>
-
-    <GridView
-        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignTop="@+id/listView"
         android:layout_centerHorizontal="true"
+
+        android:layout_below="@+id/button_Pur"
 
         android:numColumns="4"
         android:layout_marginLeft="30dp"
@@ -116,10 +106,14 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
 
+        android:layout_below="@+id/button_Pur"
+
         android:layout_alignTop="@+id/listView"
         android:layout_alignLeft="@+id/listView"
         android:layout_alignStart="@+id/listView"
-        android:id="@+id/gridView_Kosten" />
+        android:id="@+id/gridView_Kosten"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"/>
 
     <Button
         android:text="Delete"
@@ -167,6 +161,18 @@
         android:layout_alignLeft="@+id/button_All"
         android:layout_alignStart="@+id/button_All"
         android:onClick="Button_KostenClicked" />
+
+    <GridView
+        android:layout_width="match_parent"
+        android:id="@+id/listView"
+
+        android:layout_height="300dp"
+
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/button_Pur"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"/>
 
     <!--android:numColumns="auto_fit"-->
 

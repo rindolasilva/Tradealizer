@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
         GridView listv = (GridView) findViewById(R.id.listView);
-
+        listv.setVisibility(View.VISIBLE);
        // listv.setEmptyView(findViewById(R.id.ID_Kostenart));
 
         Log.d(TAG, "Vor set adapter ");
@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_kosten,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
         GridView listv = (GridView) findViewById(R.id.gridView_Kosten);
+        listv.setVisibility(View.VISIBLE);
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
         Log.d(TAG, "alles gut gelaufen ");
@@ -133,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_pur,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
         GridView listv = (GridView) findViewById(R.id.gridView_Pur);
+        listv.setVisibility(View.VISIBLE);
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
         Log.d(TAG, "alles gut gelaufen ");
@@ -150,12 +152,16 @@ public class MainActivity extends AppCompatActivity {
         populateListView3();
     }
     private void EmptyAllGrids(){
-        GridView listv = (GridView) findViewById(R.id.listView);
+        GridView gridVAll = (GridView) findViewById(R.id.listView);
         GridView gridVKosten = (GridView) findViewById(R.id.gridView_Kosten);
         GridView gridVPur = (GridView) findViewById(R.id.gridView_Pur);
 
-        listv.setAdapter(null);
+        gridVAll.setAdapter(null);
         gridVKosten.setAdapter(null);
         gridVPur.setAdapter(null);
+
+        gridVAll.setVisibility(View.INVISIBLE);
+        gridVKosten.setVisibility(View.INVISIBLE);
+        gridVPur.setVisibility(View.INVISIBLE);
     }
 }
