@@ -163,5 +163,6 @@ public class MainActivity extends AppCompatActivity {
         gridVAll.setVisibility(View.INVISIBLE);
         gridVKosten.setVisibility(View.INVISIBLE);
         gridVPur.setVisibility(View.INVISIBLE);
+        // setAdapter null loeschen
     }
 }
