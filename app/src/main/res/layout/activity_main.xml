@@ -36,19 +36,6 @@
 
 
     <Button
-        android:text="Delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="58dp"
-        android:layout_marginEnd="58dp"
-        android:id="@+id/deleteButton"
-        android:layout_alignBaseline="@+id/addButton"
-        android:layout_alignBottom="@+id/addButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="deleteButtonClicked" />
-
-    <Button
         android:text="Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,7 +98,75 @@
         android:layout_centerHorizontal="true"
         android:layout_height="300dp"
 
-        android:layout_marginLeft="30dp"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"/>
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignTop="@+id/listView"
+        android:layout_centerHorizontal="true"
+
+        android:numColumns="4"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:id="@+id/gridView_Pur" />
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+
+        android:layout_alignTop="@+id/listView"
+        android:layout_alignLeft="@+id/listView"
+        android:layout_alignStart="@+id/listView"
+        android:id="@+id/gridView_Kosten" />
+
+    <Button
+        android:text="Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteButton"
+        android:onClick="deleteButtonClicked"
+        android:layout_alignBaseline="@+id/addButton"
+        android:layout_alignBottom="@+id/addButton"
+        android:layout_toRightOf="@+id/addButton"
+        android:layout_toEndOf="@+id/addButton"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
+    <Button
+        android:text="Alles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_All"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/listView"
+        android:layout_alignEnd="@+id/listView"
+        android:layout_marginTop="12dp"
+        android:textSize="10sp"
+        android:elevation="0dp"
+        android:onClick="Button_AllClicked" />
+
+    <Button
+        android:text="Kosten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_Kosten"
+        android:layout_alignLeft="@+id/button_Kosten"
+        android:layout_alignStart="@+id/button_Kosten"
+        android:id="@+id/button_Pur"
+        android:onClick="Button_PurClicked" />
+
+    <Button
+        android:text="Beschreibung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_Kosten"
+        android:textSize="10sp"
+        android:layout_below="@+id/button_All"
+        android:layout_alignLeft="@+id/button_All"
+        android:layout_alignStart="@+id/button_All"
+        android:onClick="Button_KostenClicked" />
 
     <!--android:numColumns="auto_fit"-->
 

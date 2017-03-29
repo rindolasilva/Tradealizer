@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new AllesDBHandler(this, null, null, 1);
         printDatabase();
         Log.d(TAG, "Vor populate ");
-        //populateListView();
-        //populateListView2();
-        populateListView3();
+        populateListView();
     }
 
     @Override
@@ -73,17 +71,15 @@ public class MainActivity extends AppCompatActivity {
         Alles alles = new Alles(Integer.parseInt(myInput.getText().toString()),myBeschreibung.getText().toString());
         dbHandler.addProduct(alles);
         printDatabase();
-        //populateListView();
-        //populateListView2();
-        populateListView3();
+
+        populateListView();
     }
     public void deleteButtonClicked(View v){
         String inputText = myInput.getText().toString();
         dbHandler.deleteProduct(inputText);
         printDatabase();
-        //populateListView();
-        //populateListView2();
-        populateListView3();
+        populateListView();
+
     }
 
     public void printDatabase(){
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Vor listview instanz ");
         GridView listv = (GridView) findViewById(R.id.listView);
 
-        listv.setEmptyView(findViewById(R.id.ID_Kostenart));
+       // listv.setEmptyView(findViewById(R.id.ID_Kostenart));
 
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
@@ -121,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Vor adapter instanz ");
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_kosten,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
-        GridView listv = (GridView) findViewById(R.id.listView);
+        GridView listv = (GridView) findViewById(R.id.gridView_Kosten);
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
         Log.d(TAG, "alles gut gelaufen ");
@@ -136,9 +132,30 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Vor adapter instanz ");
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_pur,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
-        GridView listv = (GridView) findViewById(R.id.listView);
+        GridView listv = (GridView) findViewById(R.id.gridView_Pur);
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
         Log.d(TAG, "alles gut gelaufen ");
+    }
+    public void Button_AllClicked(View v){
+        EmptyAllGrids();
+        populateListView();
+    }
+    public void Button_KostenClicked(View v){
+        EmptyAllGrids();
+        populateListView2();
+    }
+    public void Button_PurClicked(View v){
+        EmptyAllGrids();
+        populateListView3();
+    }
+    private void EmptyAllGrids(){
+        GridView listv = (GridView) findViewById(R.id.listView);
+        GridView gridVKosten = (GridView) findViewById(R.id.gridView_Kosten);
+        GridView gridVPur = (GridView) findViewById(R.id.gridView_Pur);
+
+        listv.setAdapter(null);
+        gridVKosten.setAdapter(null);
+        gridVPur.setAdapter(null);
     }
 }
