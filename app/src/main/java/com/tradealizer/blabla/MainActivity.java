@@ -3,6 +3,8 @@ package com.tradealizer.blabla;
 import android.app.Dialog;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -19,13 +21,14 @@ import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
+import java.io.Console;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
-    EditText myInput;
-    EditText myBeschreibung;
+
     TextView gesamtkosten;
     //TextView myText;
     AllesDBHandler dbHandler;
@@ -46,45 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        myInput=(EditText)findViewById(R.id.myInput);
-        myBeschreibung =(EditText) findViewById(R.id.myBeschreibung);
+
         gesamtkosten = (TextView) findViewById(R.id.tv_gesamtkosten);
         //myText =(TextView)findViewById(R.id.myText);
         dbHandler = new AllesDBHandler(this, null, null, 1);
         printDatabase();
         Log.d(TAG, "Vor populate ");
         populateListView();
-
-
-        Button addEntry = (Button) findViewById(R.id.addButton);
-        addEntry.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                final Dialog d = new Dialog(MainActivity.this);
-                d.setTitle("Hinzufuegen");
-                d.setContentView(R.layout.insert_dialog_kosten);
-                d.show();
-
-                final EditText kosten = (EditText)d.findViewById(R.id.dialog_kosten);
-                Button submitB = (Button)d.findViewById(R.id.dialog_add);
-                Button cancelB = (Button)d.findViewById(R.id.dialog_cancel);
-
-                submitB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String text = kosten.getText().toString();
-                        Toast.makeText(getApplicationContext(),"Eingegebene Kosten: " + text,Toast.LENGTH_SHORT).show();
-                        d.cancel();
-                    }
-                });
-                cancelB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        d.cancel();
-                    }
-                });
-            }
-        });
     }
 
     @Override
@@ -99,24 +70,62 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void addFBClicked(View v){
+        Log.d(TAG, "Methode wird ausgeführt");
 
-    public void addButtonClicked(View v){
-       /* Products product = new Products(myInput.getText().toString());
-        dbHandler.addProduct(product);
-        printDatabase();*/
-        //myText.setText("Hallo");
-        Alles alles = new Alles(Integer.parseInt(myInput.getText().toString()),myBeschreibung.getText().toString());
-        dbHandler.addProduct(alles);
-        printDatabase();
+        FloatingActionButton addEntry = (FloatingActionButton) findViewById(R.id.addFB);
+        final Dialog d = new Dialog(MainActivity.this);
+        d.setTitle("Hinzufuegen");
+        d.setContentView(R.layout.insert_dialog_kosten);
+        d.show();
 
-        populateListView();
+        final EditText kosten = (EditText)d.findViewById(R.id.dialog_kosten);
+        final EditText beschreibung = (EditText)d.findViewById(R.id.dialog_beschreibung);
+        Button submitB = (Button)d.findViewById(R.id.dialog_add);
+        Button cancelB = (Button)d.findViewById(R.id.dialog_cancel);
+
+        submitB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dKosten = kosten.getText().toString();
+                String dBeschreibung = beschreibung.getText().toString();
+                Toast.makeText(getApplicationContext(),"Eingegebene Kosten: " + dKosten,Toast.LENGTH_SHORT).show();
+                d.cancel();
+
+                //urspruenglicher Add Button
+                        /* Products product = new Products(myInput.getText().toString());
+                        dbHandler.addProduct(product);
+                        printDatabase();*/
+                //myText.setText("Hallo");
+                        /*Alles alles = new Alles(Integer.parseInt(myInput.getText().toString()),myBeschreibung.getText().toString());
+                        dbHandler.addProduct(alles);
+                        printDatabase();
+
+                        populateListView();*/
+
+                Alles alles = new Alles(Integer.parseInt(dKosten), dBeschreibung);
+                dbHandler.addProduct(alles);
+                printDatabase();
+
+                populateListView();
+            }
+        });
+        cancelB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                d.cancel();
+
+
+                // uspruenglicher Delete Button
+                       /* String inputText = myInput.getText().toString();
+                        dbHandler.deleteProduct(inputText);
+                        printDatabase();
+                        populateListView();*/
+                // muss von hier entfernt und in extra delete button gesetzt werden
+            }
+        });
     }
-    public void deleteButtonClicked(View v){
-        String inputText = myInput.getText().toString();
-        dbHandler.deleteProduct(inputText);
-        printDatabase();
-        populateListView();
-    }
+
 
     public void printDatabase(){
         String[] dbString = dbHandler.databaseToString();
@@ -137,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Vor listview instanz ");
         GridView listv = (GridView) findViewById(R.id.listView);
         listv.setVisibility(View.VISIBLE);
-       // listv.setEmptyView(findViewById(R.id.ID_Kostenart));
+        // listv.setEmptyView(findViewById(R.id.ID_Kostenart));
 
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -25,21 +26,23 @@
 
 
     <TableRow
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:layout_weight="0.08">
         <Button
             android:text="Add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_add"
-            android:layout_weight="0.30" />
+            android:layout_weight="0.30"
+            android:backgroundTint="@android:color/holo_green_light" />
 
         <Button
             android:text="Cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cancel"
-            android:layout_weight="0.30" />
+            android:layout_weight="0.30"
+            android:backgroundTint="@android:color/holo_red_dark" />
     </TableRow>
 </LinearLayout>
