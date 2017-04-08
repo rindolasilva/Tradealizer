@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     //TextView myText;
     AllesDBHandler dbHandler;
     private static final String TAG = "MainClass";
+    int activeView = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new AllesDBHandler(this, null, null, 1);
         printDatabase();
         Log.d(TAG, "Vor populate ");
-        populateListView();
+        populateListView2();
     }
 
     @Override
@@ -141,38 +144,45 @@ public class MainActivity extends AppCompatActivity {
         gesamtkosten.setText("Gesamtkosten: " + dbString[1] + " €");
     }
     private void populateListView(){
-        Log.d(TAG, "Vor cursor ");
-        Cursor cursor = dbHandler.getAllRows();
-        Log.d(TAG, "Vor arrays und adapter ");
         String[] from = new String[] {AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
         int[] to = new int[] {R.id.ID_Kosten, R.id.ID_Beschreibung };
-        SimpleCursorAdapter cursorAdapter;
-        Log.d(TAG, "Vor adapter instanz ");
-        cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout,cursor,from,to,0);
-        Log.d(TAG, "Vor listview instanz ");
         GridView listv = (GridView) findViewById(R.id.listView);
-        listv.setVisibility(View.VISIBLE);
-        // listv.setEmptyView(findViewById(R.id.ID_Kostenart));
+        int layout = R.layout.item_layout;
 
-        Log.d(TAG, "Vor set adapter ");
-        listv.setAdapter(cursorAdapter);
-        Log.d(TAG, "alles gut gelaufen ");
+
+        activeView = 1;
+        //GridView funktioniert noch nicht!
+        //InstanceDataAdapter(from,to,listv,layout);
     }
     private void populateListView2(){
-        Log.d(TAG, "Vor cursor ");
-        Cursor cursor = dbHandler.getAllRows();
-        Log.d(TAG, "Vor arrays und adapter ");
         String[] from = new String[] {AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
         int[] to = new int[] {R.id.ID_Kosten_kosten, R.id.ID_Beschreibung_kosten };
-        SimpleCursorAdapter cursorAdapter;
-        Log.d(TAG, "Vor adapter instanz ");
-        cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_kosten,cursor,from,to,0);
-        Log.d(TAG, "Vor listview instanz ");
         ListView listv = (ListView) findViewById(R.id.gridView_Kosten);
+        int layout = R.layout.item_layout_kosten;
+
+
+        activeView = 2;
+        InstanceDataAdapter(from,to,listv,layout);
+    }
+    private void populateListView3()
+    {
+        String[] from = new String[] {AllesDBHandler.COLUMN_Kosten};
+        int[] to = new int[] {R.id.ID_Kosten_pur };
+        ListView listv = (ListView) findViewById(R.id.gridView_Pur);
+        int layout = R.layout.item_layout_pur;
+
+
+        activeView = 3;
+        InstanceDataAdapter(from, to, listv, layout);
+    }
+
+    private void InstanceDataAdapter(String[] from, int[] to, ListView listv, int layout) {
+        Cursor cursor = dbHandler.getAllRows();
+        SimpleCursorAdapter cursorAdapter;
+        cursorAdapter = new SimpleCursorAdapter(this,layout,cursor,from,to,0);
+
         listv.setVisibility(View.VISIBLE);
-        Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
-        Log.d(TAG, "alles gut gelaufen ");
 
 
 
@@ -192,57 +202,34 @@ public class MainActivity extends AppCompatActivity {
                                                                                                 }});
                                                                                             adb.show();*/
                 ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
-
-
-
                 dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
 
+                EmptyAllGrids();
+                printDatabase();
 
-
-                populateListView2();
+                if (activeView == 1){
+                    populateListView();
+                }
+                if (activeView == 2){
+                    populateListView2();
+                }
+                if (activeView == 3){
+                    populateListView3();
+                }
             }
         });
     }
-    private void populateListView3(){
-        Log.d(TAG, "Vor cursor ");
-        Cursor cursor = dbHandler.getAllRows();
-        Log.d(TAG, "Vor arrays und adapter ");
-        String[] from = new String[] {AllesDBHandler.COLUMN_Kosten};
-        int[] to = new int[] {R.id.ID_Kosten_pur };
-        SimpleCursorAdapter cursorAdapter;
-        Log.d(TAG, "Vor adapter instanz ");
-        cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_pur,cursor,from,to,0);
-        Log.d(TAG, "Vor listview instanz ");
-        ListView listv = (ListView) findViewById(R.id.gridView_Pur);
-        listv.setVisibility(View.VISIBLE);
-        Log.d(TAG, "Vor set adapter ");
-        listv.setAdapter(cursorAdapter);
-        Log.d(TAG, "alles gut gelaufen ");
-    }
-
-   /* private void populateListViewNeu(){
-
-        Cursor cursor = dbHandler.getAllRows();
-        ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
-
-        String[] from = new String[] {AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
-        int[] to = new int[] {R.id.ID_Kosten_kosten, R.id.ID_Beschreibung_kosten };
-        ArrayAdapter arrayAdapter;
-
-        //cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_pur,cursor,from,to,0);
-arrayAdapter = new ArrayAdapter(this,R.layout.item_layout_kosten,allesArrayList);
-
-        ListView listv = (ListView) findViewById(R.id.gridView_Kosten);
-        listv.setVisibility(View.VISIBLE);
-
-        listv.setAdapter(arrayAdapter);
-    }*/
-
 
 
 
     public void Button_AllClicked(View v){
-        EmptyAllGrids();
+        /*EmptyAllGrids();
+        populateListView();*/
+        for (int i = 1; i < 11; i++){
+            Alles alles = new Alles(i, String.valueOf(i));
+            dbHandler.addProduct(alles);
+        }
+        printDatabase();
         populateListView();
     }
     public void Button_KostenClicked(View v){
@@ -265,6 +252,5 @@ arrayAdapter = new ArrayAdapter(this,R.layout.item_layout_kosten,allesArrayList)
         gridVAll.setVisibility(View.INVISIBLE);
         gridVKosten.setVisibility(View.INVISIBLE);
         gridVPur.setVisibility(View.INVISIBLE);
-        // setAdapter null loeschen
     }
 }
