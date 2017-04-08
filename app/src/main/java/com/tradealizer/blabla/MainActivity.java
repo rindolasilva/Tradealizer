@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Vor adapter instanz ");
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_kosten,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
-        GridView listv = (GridView) findViewById(R.id.gridView_Kosten);
+        ListView listv = (ListView) findViewById(R.id.gridView_Kosten);
         listv.setVisibility(View.VISIBLE);
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Vor adapter instanz ");
         cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_pur,cursor,from,to,0);
         Log.d(TAG, "Vor listview instanz ");
-        GridView listv = (GridView) findViewById(R.id.gridView_Pur);
+        ListView listv = (ListView) findViewById(R.id.gridView_Pur);
         listv.setVisibility(View.VISIBLE);
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
@@ -198,8 +199,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void EmptyAllGrids(){
         GridView gridVAll = (GridView) findViewById(R.id.listView);
-        GridView gridVKosten = (GridView) findViewById(R.id.gridView_Kosten);
-        GridView gridVPur = (GridView) findViewById(R.id.gridView_Pur);
+        ListView gridVKosten = (ListView) findViewById(R.id.gridView_Kosten);
+        ListView gridVPur = (ListView) findViewById(R.id.gridView_Pur);
 
         gridVAll.setAdapter(null);
         gridVKosten.setAdapter(null);
