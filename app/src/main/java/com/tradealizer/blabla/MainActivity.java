@@ -1,17 +1,23 @@
 package com.tradealizer.blabla;
 
+import android.app.Dialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.PopupWindow;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +54,37 @@ public class MainActivity extends AppCompatActivity {
         printDatabase();
         Log.d(TAG, "Vor populate ");
         populateListView();
+
+
+        Button addEntry = (Button) findViewById(R.id.addButton);
+        addEntry.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                final Dialog d = new Dialog(MainActivity.this);
+                d.setTitle("Hinzufuegen");
+                d.setContentView(R.layout.insert_dialog_kosten);
+                d.show();
+
+                final EditText kosten = (EditText)d.findViewById(R.id.dialog_kosten);
+                Button submitB = (Button)d.findViewById(R.id.dialog_add);
+                Button cancelB = (Button)d.findViewById(R.id.dialog_cancel);
+
+                submitB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String text = kosten.getText().toString();
+                        Toast.makeText(getApplicationContext(),"Eingegebene Kosten: " + text,Toast.LENGTH_SHORT).show();
+                        d.cancel();
+                    }
+                });
+                cancelB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        d.cancel();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -79,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         dbHandler.deleteProduct(inputText);
         printDatabase();
         populateListView();
-
     }
 
     public void printDatabase(){
