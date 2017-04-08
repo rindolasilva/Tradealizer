@@ -1,6 +1,7 @@
 package com.tradealizer.blabla;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.IntegerRes;
@@ -12,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -23,6 +27,7 @@ import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import java.io.Console;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -168,6 +173,35 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Vor set adapter ");
         listv.setAdapter(cursorAdapter);
         Log.d(TAG, "alles gut gelaufen ");
+
+
+
+
+
+        listv.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete " + position);
+                final int positionToRemove = position;
+                                                                                            /*adb.setNegativeButton("Cancel", null);
+                                                                                            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                    MyDataObject.remove(positionToRemove);
+                                                                                                    adapter.notifyDataSetChanged();
+                                                                                                }});
+                                                                                            adb.show();*/
+                ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
+
+
+
+                dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
+
+
+
+                populateListView2();
+            }
+        });
     }
     private void populateListView3(){
         Log.d(TAG, "Vor cursor ");
@@ -185,6 +219,28 @@ public class MainActivity extends AppCompatActivity {
         listv.setAdapter(cursorAdapter);
         Log.d(TAG, "alles gut gelaufen ");
     }
+
+   /* private void populateListViewNeu(){
+
+        Cursor cursor = dbHandler.getAllRows();
+        ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
+
+        String[] from = new String[] {AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
+        int[] to = new int[] {R.id.ID_Kosten_kosten, R.id.ID_Beschreibung_kosten };
+        ArrayAdapter arrayAdapter;
+
+        //cursorAdapter = new SimpleCursorAdapter(this,R.layout.item_layout_pur,cursor,from,to,0);
+arrayAdapter = new ArrayAdapter(this,R.layout.item_layout_kosten,allesArrayList);
+
+        ListView listv = (ListView) findViewById(R.id.gridView_Kosten);
+        listv.setVisibility(View.VISIBLE);
+
+        listv.setAdapter(arrayAdapter);
+    }*/
+
+
+
+
     public void Button_AllClicked(View v){
         EmptyAllGrids();
         populateListView();

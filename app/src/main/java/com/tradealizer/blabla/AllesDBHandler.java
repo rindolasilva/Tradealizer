@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -125,6 +126,19 @@ public class AllesDBHandler extends SQLiteOpenHelper {
             c.moveToFirst();
         }
         return c;
+    }
+    public ArrayList getArrayList(){
+        ArrayList<Alles> aAlles = new ArrayList<Alles>();
+        Cursor c = getAllRows();
+        do
+        {
+            String[] data = new String[2];
+            data[0]=c.getString(1);
+            data[1]=c.getString(2);
+            aAlles.add(new Alles(Integer.parseInt(data[0]),data[1]));
+        }while (c.moveToNext());
+        c.close();
+        return aAlles;
     }
 
     public String[] databaseToString(){
