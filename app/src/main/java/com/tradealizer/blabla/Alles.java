@@ -1,6 +1,8 @@
 package com.tradealizer.blabla;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Alex on 01.03.2017.
@@ -25,10 +27,17 @@ public class Alles {
 
     public Alles(int Kosten){
         this.Kosten=Kosten;
+
+        Date ZwischenDatum = new Date(System.currentTimeMillis());
+        this.Datum = ZwischenDatum;
+
     }
     public Alles(int Kosten, String Beschreibung){
         this.Kosten=Kosten;
         this.Beschreibung=Beschreibung;
+
+        Date ZwischenDatum = new Date(System.currentTimeMillis());
+        this.Datum = ZwischenDatum;
     }
     public Alles(int Kosten, String Beschreibung, Date Datum, Arten Art, Kostenarten Kostenart, String Ort, String Adresse, String Person){
         this.Kosten=Kosten;
@@ -39,6 +48,9 @@ public class Alles {
         this.Ort=Ort;
         this.Adresse=Adresse;
         this.Person=Person;
+
+        Date ZwischenDatum = new Date(System.currentTimeMillis());
+        this.Datum = ZwischenDatum;
     }
     public int getKosten() {
         return Kosten;
@@ -63,7 +75,7 @@ public class Alles {
         }
         else
         {
-            return "";
+            return " ";
         }
     }
 
@@ -78,7 +90,7 @@ public class Alles {
         }
         else
         {
-            return "";
+            return " ";
         }
     }
 
@@ -87,7 +99,8 @@ public class Alles {
     }
 
     public String getOrt() {
-        return Ort;
+        //return Ort;
+        return ((Ort == null) ? " " : Ort);
     }
 
     public void setOrt(String ort) {
@@ -95,7 +108,8 @@ public class Alles {
     }
 
     public String getAdresse() {
-        return Adresse;
+        //return Adresse;
+        return ((Adresse == null) ? " " : Adresse);
     }
 
     public void setAdresse(String adresse) {
@@ -103,10 +117,23 @@ public class Alles {
     }
 
     public String getPerson() {
-        return Person;
+        //return Person;
+        return ((Person == null) ? " " : Person);
     }
 
     public void setPerson(String person) {
         Person = person;
+    }
+
+    public Date getDatum() {
+        return Datum;
+        //DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+        //java.sql.Date datum = new Date(2000-01-01);
+        //return datum;
+        //return new Date(2000-01-01);
+    }
+
+    public int getID() {
+        return ID;
     }
 }

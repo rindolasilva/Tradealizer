@@ -201,8 +201,26 @@ public class MainActivity extends AppCompatActivity {
                 d.setTitle("Details");
                 d.setContentView(R.layout.item_layout);
 
+                TextView kosten = (TextView) d.findViewById(R.id.ID_Kosten);
                 TextView beschreibung = (TextView) d.findViewById(R.id.ID_Beschreibung);
+                TextView datum = (TextView) d.findViewById(R.id.ID_Datum);
+                TextView art = (TextView) d.findViewById(R.id.ID_Art);
+                TextView kostenart = (TextView) d.findViewById(R.id.ID_Kostenart);
+                TextView ort = (TextView) d.findViewById(R.id.ID_Ort);
+                TextView adresse = (TextView) d.findViewById(R.id.ID_Adresse);
+                TextView person = (TextView) d.findViewById(R.id.ID_Person);
+
+
+                // Werte auf null checken!
+
+                kosten.setText(Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
                 beschreibung.setText(allesArrayList.get(positionToRemove).getBeschreibung());
+                datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
+                art.setText(allesArrayList.get(positionToRemove).getArt());
+                kostenart.setText(allesArrayList.get(positionToRemove).getKostenart());
+                ort.setText(allesArrayList.get(positionToRemove).getOrt());
+                adresse.setText(allesArrayList.get(positionToRemove).getAdresse());
+                person.setText(allesArrayList.get(positionToRemove).getPerson());
 
                 d.show();
 
