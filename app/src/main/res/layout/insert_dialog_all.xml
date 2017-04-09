@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_kosten_alles"
+
+        android:hint="@string/kosten_string"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_beschreibung_alles"
+
+        android:hint="@string/beschreibung_string"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_art_alles"
+
+        android:hint="@string/art_string"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_spinner_kostenart_alles"
+        android:entries="@array/dialog_spinner_kostenart" />
+    <!--<EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_kostenart_alles"
+
+        android:hint="@string/kostenart_string"/>-->
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_ort_alles"
+
+        android:hint="@string/ort_string"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_adresse_alles"
+
+        android:hint="@string/adresse_string"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/dialog_person_alles"
+
+        android:hint="@string/person_string"/>
+
+<TableRow
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Button
+        android:text="Add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_add_alles"
+        android:layout_weight="0.30"
+        android:backgroundTint="@android:color/holo_green_light"/>
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_cancel_alles"
+        android:layout_weight="0.30"
+        android:backgroundTint="@android:color/holo_red_dark"/>
+</TableRow>
+
+
+
+</LinearLayout>

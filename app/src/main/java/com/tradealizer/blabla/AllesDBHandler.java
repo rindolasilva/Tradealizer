@@ -7,10 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 /**
  * Created by Alex on 01.03.2017.
  */
@@ -130,13 +131,30 @@ public class AllesDBHandler extends SQLiteOpenHelper {
     public ArrayList getArrayList(){
         ArrayList<Alles> aAlles = new ArrayList<Alles>();
         Cursor c = getAllRows();
+        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         do
         {
-            String[] data = new String[2];
+            String[] data = new String[9];
             data[0]=c.getString(1);
             data[1]=c.getString(2);
-            aAlles.add(new Alles(Integer.parseInt(data[0]),data[1]));
-        }while (c.moveToNext());
+            data[2] = c.getString(3);
+
+            if (c.getString(4)==null)
+            {
+                aAlles.add(new Alles(Integer.parseInt(data[0]),data[1],data[2]));
+            }
+            else
+            {
+                data[3] = c.getString(4);
+                data[4] = c.getString(5);
+                data[5] = c.getString(6);
+                data[6] = c.getString(7);
+                data[7] = c.getString(8);
+
+                aAlles.add(new Alles(Integer.parseInt(data[0]),data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
+            }
+
+        } while (c.moveToNext());
         c.close();
         return aAlles;
     }

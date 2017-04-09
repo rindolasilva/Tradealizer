@@ -12,5 +12,13 @@
     <string name="adresse_string">Adresse</string>
     <string name="person_string">Person</string>
 
+    <string-array name="dialog_spinner_kostenart">
+        <item>Bargeld</item>
+        <item>Kreditkarte</item>
+        <item>Bankomatkarte</item>
+        <item>Scheck</item>
+        <item>Essensmarken</item>
+        <item>Gold</item>
+    </string-array>
 
 </resources>
