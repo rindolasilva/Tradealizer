@@ -1,33 +1,26 @@
 package com.tradealizer.blabla;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.view.LayoutInflater;
 import android.widget.Toast;
 
-import java.io.Console;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -146,13 +139,13 @@ public class MainActivity extends AppCompatActivity {
     private void populateListView(){
         String[] from = new String[] {AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
         int[] to = new int[] {R.id.ID_Kosten, R.id.ID_Beschreibung };
-        GridView listv = (GridView) findViewById(R.id.listView);
+        ListView listv = (ListView) findViewById(R.id.listView);
         int layout = R.layout.item_layout;
 
 
         activeView = 1;
         //GridView funktioniert noch nicht!
-        //InstanceDataAdapter(from,to,listv,layout);
+        InstanceDataAdapter(from,to,listv,layout);
     }
     private void populateListView2(){
         String[] from = new String[] {AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
@@ -202,7 +195,20 @@ public class MainActivity extends AppCompatActivity {
                                                                                                 }});
                                                                                             adb.show();*/
                 ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
-                dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
+
+
+                final Dialog d = new Dialog(MainActivity.this);
+                d.setTitle("Details");
+                d.setContentView(R.layout.item_layout);
+
+                TextView beschreibung = (TextView) d.findViewById(R.id.ID_Beschreibung);
+                beschreibung.setText(allesArrayList.get(positionToRemove).getBeschreibung());
+
+                d.show();
+
+
+
+                //dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
 
                 EmptyAllGrids();
                 printDatabase();
@@ -216,6 +222,9 @@ public class MainActivity extends AppCompatActivity {
                 if (activeView == 3){
                     populateListView3();
                 }
+
+
+
             }
         });
     }
@@ -229,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
             Alles alles = new Alles(i, String.valueOf(i));
             dbHandler.addProduct(alles);
         }
+        EmptyAllGrids();
         printDatabase();
         populateListView();
     }
@@ -241,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         populateListView3();
     }
     private void EmptyAllGrids(){
-        GridView gridVAll = (GridView) findViewById(R.id.listView);
+        ListView gridVAll = (ListView) findViewById(R.id.listView);
         ListView gridVKosten = (ListView) findViewById(R.id.gridView_Kosten);
         ListView gridVPur = (ListView) findViewById(R.id.gridView_Pur);
 

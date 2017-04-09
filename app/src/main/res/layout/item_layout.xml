@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <TextView
+        android:hint="@string/kosten_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID_Kosten"
+
+            android:layout_weight="0.33"
+        />
+
+        <TextView
+            android:hint="@string/datum_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ID_Datum"
+
+            android:layout_weight="0.33"
+            />
+        <TextView
         android:hint="@string/person_string"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Person"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/ID_Adresse"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/ID_Adresse" />
 
+            android:layout_weight="0.33"
+        />
+
+    </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:hint="@string/adresse_string"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Adresse"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintTop_toBottomOf="@+id/ID_Ort"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/ID_Ort" />
+
+        android:layout_weight="0.5"
+        />
 
     <TextView
         android:hint="@string/ort_string"
@@ -34,85 +58,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Ort"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/puffer2"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/puffer2" />
 
-    <TextView
-        android:hint="@string/kosten_string"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ID_Kosten"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_weight="0.5"
+        />
+</LinearLayout>
 
-    <TextView
-        android:hint="@string/datum_string"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ID_Datum"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintTop_toBottomOf="@+id/ID_Kosten"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/ID_Kosten" />
 
-    <TextView
-        android:hint="----"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/puffer"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/ID_Datum"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/ID_Datum" />
 
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:hint="@string/art_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Art"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintTop_toBottomOf="@+id/puffer"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/puffer" />
+
+        android:layout_weight="0.5"
+        />
 
     <TextView
         android:hint="@string/kostenart_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Kostenart"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/ID_Art"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/ID_Art" />
 
-    <TextView
-        android:hint="----"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/puffer2"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintTop_toBottomOf="@+id/ID_Kostenart"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/ID_Kostenart" />
+        android:layout_weight="0.5"
+        />
+</LinearLayout>
+
 
     <TextView
         android:hint="@string/beschreibung_string"
-        android:layout_width="276dp"
+        android:layout_width="match_parent"
         android:layout_height="156dp"
         android:id="@+id/ID_Beschreibung"
 
         android:inputType="textMultiLine"
-        android:layout_marginStart="48dp"
-        app:layout_constraintLeft_toRightOf="@+id/ID_Kosten"
-        android:layout_marginLeft="48dp"
-        app:layout_constraintTop_toTopOf="@+id/ID_Kosten"
-        app:layout_constraintBottom_toBottomOf="@+id/ID_Person" />
-</android.support.constraint.ConstraintLayout>
+
+        android:layout_weight="1"
+        />
+</LinearLayout>
