@@ -9,18 +9,21 @@ import java.text.SimpleDateFormat;
  */
 
 public class Alles {
-    public enum Arten{
+   /* public enum Arten{
 
     }
     public enum Kostenarten{
 
-    }
+    }*/
     private int ID;
     private int Kosten;
     private String Beschreibung;
-    private Date Datum;
-    private Arten Art;
-    private Kostenarten Kostenart;
+    //private Date Datum;
+    //private Arten Art;
+    //private Kostenarten Kostenart;
+    private String Datum;
+    private String Art;
+    private String Kostenart;
     private String Ort;
     private String Adresse;
     private String Person;
@@ -29,7 +32,7 @@ public class Alles {
         this.Kosten=Kosten;
 
         Date ZwischenDatum = new Date(System.currentTimeMillis());
-        this.Datum = ZwischenDatum;
+        this.Datum = ZwischenDatum.toString();
 
     }
     public Alles(int Kosten, String Beschreibung){
@@ -37,9 +40,14 @@ public class Alles {
         this.Beschreibung=Beschreibung;
 
         Date ZwischenDatum = new Date(System.currentTimeMillis());
-        this.Datum = ZwischenDatum;
+        this.Datum = ZwischenDatum.toString();
     }
-    public Alles(int Kosten, String Beschreibung, Date Datum, Arten Art, Kostenarten Kostenart, String Ort, String Adresse, String Person){
+    public Alles(int Kosten, String Beschreibung, String Datum){
+        this.Kosten=Kosten;
+        this.Beschreibung=Beschreibung;
+        this.Datum = Datum;
+    }
+    public Alles(int Kosten, String Beschreibung, String Art, String Kostenart, String Ort, String Adresse, String Person){
         this.Kosten=Kosten;
         this.Beschreibung=Beschreibung;
         this.Datum=Datum;
@@ -50,8 +58,19 @@ public class Alles {
         this.Person=Person;
 
         Date ZwischenDatum = new Date(System.currentTimeMillis());
-        this.Datum = ZwischenDatum;
+        this.Datum = ZwischenDatum.toString();
     }
+    public Alles(int Kosten, String Beschreibung, String Datum, String Art, String Kostenart, String Ort, String Adresse, String Person){
+        this.Kosten=Kosten;
+        this.Beschreibung=Beschreibung;
+        this.Datum=Datum;
+        this.Art=Art;
+        this.Kostenart=Kostenart;
+        this.Ort=Ort;
+        this.Adresse=Adresse;
+        this.Person=Person;
+    }
+
     public int getKosten() {
         return Kosten;
     }
@@ -71,7 +90,7 @@ public class Alles {
     public String getArt() {
         if (Art != null)
         {
-            return Art.toString();
+            return Art;
         }
         else
         {
@@ -79,14 +98,14 @@ public class Alles {
         }
     }
 
-    public void setArt(Arten art) {
+    public void setArt(String art) {
         Art = art;
     }
 
     public String getKostenart() {
         if (Kostenart != null)
         {
-            return Kostenart.toString();
+            return Kostenart;
         }
         else
         {
@@ -94,7 +113,7 @@ public class Alles {
         }
     }
 
-    public void setKostenart(Kostenarten kostenart) {
+    public void setKostenart(String kostenart) {
         Kostenart = kostenart;
     }
 
@@ -125,7 +144,7 @@ public class Alles {
         Person = person;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return Datum;
         //DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         //java.sql.Date datum = new Date(2000-01-01);
