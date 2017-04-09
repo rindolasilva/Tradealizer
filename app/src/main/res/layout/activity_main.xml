@@ -36,38 +36,34 @@
 
     <!-- @dimen/activity_horizontal_margin // für paddingLeft und Right-->
 
-        <TextView
-            android:text="Gesamtkosten: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_gesamtkosten"
-            android:textAlignment="viewStart"
-            android:textStyle="normal|bold"
-            android:textSize="24sp"
-            android:textAllCaps="false"
-            android:background="@color/colorPrimary"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+    <TextView
+        android:id="@+id/tv_gesamtkosten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimary"
+        android:text="Gesamtkosten: "
+
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
 
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/listView"
-        android:layout_centerHorizontal="true"
 
 
-
-
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
 
         android:id="@+id/gridView_Pur"
 
-        />
+        android:layout_above="@+id/tv_gesamtkosten" />
 
     <!--android:numColumns="4" -->
 
@@ -80,14 +76,15 @@
         android:layout_alignTop="@+id/listView"
         android:id="@+id/gridView_Kosten"
 
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
 
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
 
-       />
+        android:layout_above="@+id/tv_gesamtkosten"
+        android:layout_alignRight="@+id/gridView_Pur"
+        android:layout_alignEnd="@+id/gridView_Pur" />
 
     <ListView
         android:layout_width="match_parent"
@@ -98,13 +95,13 @@
 
         android:layout_below="@+id/linearLayout"
 
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:numColumns="auto_fit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/tv_gesamtkosten"
+        android:layout_alignRight="@+id/gridView_Pur"
+        android:layout_alignEnd="@+id/gridView_Pur" />
 
     <!--android:numColumns="auto_fit"-->
 
