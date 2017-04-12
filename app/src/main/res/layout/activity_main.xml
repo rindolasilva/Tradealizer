@@ -60,6 +60,7 @@
 
 
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
 
         android:id="@+id/gridView_Pur"
 
@@ -77,6 +78,7 @@
         android:id="@+id/gridView_Kosten"
 
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
 
 
         android:layout_alignParentLeft="true"
@@ -95,7 +97,10 @@
 
         android:layout_below="@+id/linearLayout"
 
+
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
         android:numColumns="auto_fit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -124,15 +129,15 @@
             android:id="@+id/main_container"
             ></FrameLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <Button
             android:id="@+id/button_All"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/listView"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/listView"
+
             android:layout_weight="0.33"
-            android:elevation="0dp"
             android:onClick="Button_AllClicked"
             android:text="Alles"
             android:textSize="10sp" />
@@ -141,9 +146,7 @@
             android:id="@+id/button_Pur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button_Kosten"
-            android:layout_alignStart="@+id/button_Kosten"
-            android:layout_below="@+id/button_Kosten"
+
             android:layout_weight="0.33"
             android:onClick="Button_PurClicked"
             android:text="Kosten"
@@ -153,14 +156,12 @@
             android:id="@+id/button_Kosten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button_All"
-            android:layout_alignStart="@+id/button_All"
-            android:layout_below="@+id/button_All"
+
             android:layout_weight="0.33"
             android:onClick="Button_KostenClicked"
             android:text="Beschreibung"
             android:textSize="10sp" />
-
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -171,13 +172,11 @@
         app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_input_add"
         android:id="@+id/addFB"
-        android:layout_marginRight="11dp"
-        android:layout_marginEnd="11dp"
         android:onClick="addFBClicked"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/gridView_Pur"
-        android:layout_alignEnd="@+id/gridView_Pur"
-        android:layout_marginBottom="18dp" />
+        android:layout_above="@+id/tv_gesamtkosten"
+        android:layout_alignRight="@+id/gridView_Kosten"
+        android:layout_alignEnd="@+id/gridView_Kosten"
+        android:layout_marginBottom="10dp" />
 
 
 </RelativeLayout>

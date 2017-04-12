@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/ID_Kosten"
 
-            android:layout_weight="0.33"
+            android:layout_weight="0.5"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
         />
 
         <TextView
@@ -24,24 +26,25 @@
             android:layout_height="wrap_content"
             android:id="@+id/ID_Datum"
 
-            android:layout_weight="0.33"
+            android:layout_weight="0.5"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:gravity="end"
             />
-        <TextView
+
+
+    </LinearLayout>
+    <TextView
         android:hint="@string/person_string"
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Person"
 
-            android:layout_weight="0.33"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
         />
 
-    </LinearLayout>
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
     <TextView
         android:hint="@string/adresse_string"
 
@@ -49,7 +52,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/ID_Adresse"
 
-        android:layout_weight="0.5"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
         />
 
     <TextView
@@ -59,23 +63,25 @@
         android:layout_height="wrap_content"
         android:id="@+id/ID_Ort"
 
-        android:layout_weight="0.5"
+
+        android:gravity="end"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
         />
-</LinearLayout>
 
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
+
     <TextView
         android:hint="@string/art_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ID_Art"
 
-        android:layout_weight="0.5"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
         />
 
     <TextView
@@ -84,19 +90,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/ID_Kostenart"
 
-        android:layout_weight="0.5"
+
+        android:gravity="end"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
         />
-</LinearLayout>
+
 
 
     <TextView
-        android:hint="@string/beschreibung_string"
-        android:layout_width="match_parent"
-        android:layout_height="156dp"
         android:id="@+id/ID_Beschreibung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:hint="@string/beschreibung_string"
 
         android:inputType="textMultiLine"
 
-        android:layout_weight="1"
-        />
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"/>
 </LinearLayout>

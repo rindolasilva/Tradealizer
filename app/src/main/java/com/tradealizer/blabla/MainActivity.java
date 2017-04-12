@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -21,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -324,16 +327,19 @@ public class MainActivity extends AppCompatActivity {
 
                 // Werte auf null checken!
 
-                kosten.setText(Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
-                beschreibung.setText(allesArrayList.get(positionToRemove).getBeschreibung());
+                kosten.setText("Kosten: " + Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
+                beschreibung.setText("Beschreibung: " + allesArrayList.get(positionToRemove).getBeschreibung());
                 datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
-                art.setText(allesArrayList.get(positionToRemove).getArt());
-                kostenart.setText(allesArrayList.get(positionToRemove).getKostenart());
-                ort.setText(allesArrayList.get(positionToRemove).getOrt());
-                adresse.setText(allesArrayList.get(positionToRemove).getAdresse());
-                person.setText(allesArrayList.get(positionToRemove).getPerson());
+                art.setText("Art: " + allesArrayList.get(positionToRemove).getArt());
+                kostenart.setText("Kostenart: " + allesArrayList.get(positionToRemove).getKostenart());
+                ort.setText("Ort: " + allesArrayList.get(positionToRemove).getOrt());
+                adresse.setText("Adresse: " + allesArrayList.get(positionToRemove).getAdresse());
+                person.setText("Person: " + allesArrayList.get(positionToRemove).getPerson());
 
                 d.show();
+
+                Window w = d.getWindow();
+                w.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
 
                 //dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
