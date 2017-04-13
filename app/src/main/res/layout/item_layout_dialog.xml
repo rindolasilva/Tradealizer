@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <TextView
+        android:hint="@string/kosten_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID_Kosten_Dialog"
+
+            android:layout_weight="0.5"
+            android:paddingStart="5dp"
+            android:paddingLeft="5dp"
+        />
+
+        <TextView
+            android:hint="@string/datum_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ID_Datum_Dialog"
+
+            android:layout_weight="0.5"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
+            android:gravity="end"
+            />
+
+
+    </LinearLayout>
+    <TextView
+        android:hint="@string/person_string"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID_Person_Dialog"
+
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        />
+
+    <TextView
+        android:hint="@string/adresse_string"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID_Adresse_Dialog"
+
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        />
+
+    <TextView
+        android:hint="@string/ort_string"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID_Ort_Dialog"
+
+
+        android:gravity="end"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        />
+
+
+
+
+
+
+    <TextView
+        android:hint="@string/art_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID_Art_Dialog"
+
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        />
+
+    <TextView
+        android:hint="@string/kostenart_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID_Kostenart_Dialog"
+
+
+        android:gravity="end"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        />
+
+
+    <TextView
+        android:id="@+id/ID_Beschreibung_Dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:hint="@string/beschreibung_string"
+
+        android:inputType="textMultiLine"
+
+        android:paddingLeft="5dp"
+        android:paddingStart="5dp" />
+
+    <Button
+        android:id="@+id/dialogB_Edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+
+       />
+
+    <Button
+        android:id="@+id/dialogB_Delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Delete"
+
+       />
+
+</LinearLayout>

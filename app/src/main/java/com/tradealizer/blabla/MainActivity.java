@@ -308,33 +308,45 @@ public class MainActivity extends AppCompatActivity {
                                                                                                     adapter.notifyDataSetChanged();
                                                                                                 }});
                                                                                             adb.show();*/
-                ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
+                final ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
 
 
                 final Dialog d = new Dialog(MainActivity.this);
                 d.setTitle("Details");
-                d.setContentView(R.layout.item_layout);
+                d.setContentView(R.layout.item_layout_dialog);
 
-                TextView kosten = (TextView) d.findViewById(R.id.ID_Kosten);
-                TextView beschreibung = (TextView) d.findViewById(R.id.ID_Beschreibung);
-                TextView datum = (TextView) d.findViewById(R.id.ID_Datum);
-                TextView art = (TextView) d.findViewById(R.id.ID_Art);
-                TextView kostenart = (TextView) d.findViewById(R.id.ID_Kostenart);
-                TextView ort = (TextView) d.findViewById(R.id.ID_Ort);
-                TextView adresse = (TextView) d.findViewById(R.id.ID_Adresse);
-                TextView person = (TextView) d.findViewById(R.id.ID_Person);
+                TextView kosten = (TextView) d.findViewById(R.id.ID_Kosten_Dialog);
+                TextView beschreibung = (TextView) d.findViewById(R.id.ID_Beschreibung_Dialog);
+                TextView datum = (TextView) d.findViewById(R.id.ID_Datum_Dialog);
+                TextView art = (TextView) d.findViewById(R.id.ID_Art_Dialog);
+                TextView kostenart = (TextView) d.findViewById(R.id.ID_Kostenart_Dialog);
+                TextView ort = (TextView) d.findViewById(R.id.ID_Ort_Dialog);
+                TextView adresse = (TextView) d.findViewById(R.id.ID_Adresse_Dialog);
+                TextView person = (TextView) d.findViewById(R.id.ID_Person_Dialog);
+
+                Button editB = (Button) d.findViewById(R.id.dialogB_Edit);
+                Button deleB = (Button) d.findViewById(R.id.dialogB_Delete);
 
 
                 // Werte auf null checken!
 
-                kosten.setText("Kosten: " + Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
+                /*kosten.setText("Kosten: " + Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
                 beschreibung.setText("Beschreibung: " + allesArrayList.get(positionToRemove).getBeschreibung());
                 datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
                 art.setText("Art: " + allesArrayList.get(positionToRemove).getArt());
                 kostenart.setText("Kostenart: " + allesArrayList.get(positionToRemove).getKostenart());
                 ort.setText("Ort: " + allesArrayList.get(positionToRemove).getOrt());
                 adresse.setText("Adresse: " + allesArrayList.get(positionToRemove).getAdresse());
-                person.setText("Person: " + allesArrayList.get(positionToRemove).getPerson());
+                person.setText("Person: " + allesArrayList.get(positionToRemove).getPerson());*/
+
+                 kosten.setText(Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
+                beschreibung.setText(allesArrayList.get(positionToRemove).getBeschreibung());
+                datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
+                art.setText(allesArrayList.get(positionToRemove).getArt());
+                kostenart.setText(allesArrayList.get(positionToRemove).getKostenart());
+                ort.setText(allesArrayList.get(positionToRemove).getOrt());
+                adresse.setText(allesArrayList.get(positionToRemove).getAdresse());
+                person.setText(allesArrayList.get(positionToRemove).getPerson());
 
                 d.show();
 
@@ -344,27 +356,93 @@ public class MainActivity extends AppCompatActivity {
 
                 //dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
 
-                EmptyAllGrids();
-                printDatabase();
 
-                if (activeView == 1) {
-                    populateListView();
-                }
-                if (activeView == 2) {
-                    populateListView2();
-                }
-                if (activeView == 3) {
-                    populateListView3();
-                }
-                if (activeView == 4){
-                    populateListViewAlle();
-                }
+                editB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dialog dEdit = new Dialog(MainActivity.this);
+                        dEdit.setTitle("Edit");
+                        dEdit.setContentView(R.layout.insert_dialog_all);
 
+                        EditText kosten = (EditText) dEdit.findViewById(R.id.dialog_kosten_alles);
+                        EditText beschreibung = (EditText) dEdit.findViewById(R.id.dialog_beschreibung_alles);
+                        //EditText datum = (EditText) dEdit.findViewById(R.id.dialo_);
+                        EditText art = (EditText) dEdit.findViewById(R.id.dialog_art_alles);
+                        Spinner kostenart = (Spinner) dEdit.findViewById(R.id.dialog_spinner_kostenart_alles);
+                        EditText ort = (EditText) dEdit.findViewById(R.id.dialog_ort_alles);
+                        EditText adresse = (EditText) dEdit.findViewById(R.id.dialog_adresse_alles);
+                        EditText person = (EditText) dEdit.findViewById(R.id.dialog_person_alles);
 
+                        kosten.setText("Kosten: " + Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
+                        beschreibung.setText("Beschreibung: " + allesArrayList.get(positionToRemove).getBeschreibung());
+                        //datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
+                        art.setText("Art: " + allesArrayList.get(positionToRemove).getArt());
+
+                        int kostenArtPosition = CheckKostenart(allesArrayList.get(positionToRemove).getKostenart());
+                        kostenart.setSelection(kostenArtPosition);
+                        //kostenart.setText("Kostenart: " + allesArrayList.get(positionToRemove).getKostenart());
+                        //kostenart.setSelection();
+                        ort.setText("Ort: " + allesArrayList.get(positionToRemove).getOrt());
+                        adresse.setText("Adresse: " + allesArrayList.get(positionToRemove).getAdresse());
+                        person.setText("Person: " + allesArrayList.get(positionToRemove).getPerson());
+
+                        dEdit.show();
+                    }
+                });
+
+                deleB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
+                        d.cancel();
+                        RefreshListviews();
+                    }
+                });
+        RefreshListviews();
             }
         });
     }
+    public void RefreshListviews(){
+        EmptyAllGrids();
+        printDatabase();
 
+        if (activeView == 1) {
+            populateListView();
+        }
+        if (activeView == 2) {
+            populateListView2();
+        }
+        if (activeView == 3) {
+            populateListView3();
+        }
+        if (activeView == 4){
+            populateListViewAlle();
+        }
+    }
+
+public int CheckKostenart(String s){
+    int position = 0;
+    switch (s) {
+        case "Bargeld":
+            break;
+        case "Kreditkarte":
+            position = 1;
+            break;
+        case "Bankomatkarte":
+            position = 2;
+            break;
+        case "Scheck":
+            position = 3;
+            break;
+        case "Essensmarken":
+            position = 4;
+            break;
+        case "Gold":
+            position = 5;
+            break;
+    }
+    return position;
+}
 
     public void Button_AllClicked(View v) {
         /*EmptyAllGrids();
