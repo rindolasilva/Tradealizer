@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView kosten = (TextView) d.findViewById(R.id.ID_Kosten_Dialog);
                 TextView beschreibung = (TextView) d.findViewById(R.id.ID_Beschreibung_Dialog);
-                TextView datum = (TextView) d.findViewById(R.id.ID_Datum_Dialog);
+                final TextView datum = (TextView) d.findViewById(R.id.ID_Datum_Dialog);
                 TextView art = (TextView) d.findViewById(R.id.ID_Art_Dialog);
                 TextView kostenart = (TextView) d.findViewById(R.id.ID_Kostenart_Dialog);
                 TextView ort = (TextView) d.findViewById(R.id.ID_Ort_Dialog);
@@ -360,33 +360,66 @@ public class MainActivity extends AppCompatActivity {
                 editB.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Dialog dEdit = new Dialog(MainActivity.this);
+                        d.cancel();
+                        final Dialog dEdit = new Dialog(MainActivity.this);
                         dEdit.setTitle("Edit");
                         dEdit.setContentView(R.layout.insert_dialog_all);
 
-                        EditText kosten = (EditText) dEdit.findViewById(R.id.dialog_kosten_alles);
-                        EditText beschreibung = (EditText) dEdit.findViewById(R.id.dialog_beschreibung_alles);
-                        //EditText datum = (EditText) dEdit.findViewById(R.id.dialo_);
-                        EditText art = (EditText) dEdit.findViewById(R.id.dialog_art_alles);
-                        Spinner kostenart = (Spinner) dEdit.findViewById(R.id.dialog_spinner_kostenart_alles);
-                        EditText ort = (EditText) dEdit.findViewById(R.id.dialog_ort_alles);
-                        EditText adresse = (EditText) dEdit.findViewById(R.id.dialog_adresse_alles);
-                        EditText person = (EditText) dEdit.findViewById(R.id.dialog_person_alles);
+                        final EditText kosten = (EditText) dEdit.findViewById(R.id.dialog_kosten_alles);
+                        final EditText beschreibung = (EditText) dEdit.findViewById(R.id.dialog_beschreibung_alles);
+                        //final EditText datum = (EditText) dEdit.findViewById(R.id.dialo_);
+                        final EditText art = (EditText) dEdit.findViewById(R.id.dialog_art_alles);
+                        final Spinner kostenart = (Spinner) dEdit.findViewById(R.id.dialog_spinner_kostenart_alles);
+                        final EditText ort = (EditText) dEdit.findViewById(R.id.dialog_ort_alles);
+                        final EditText adresse = (EditText) dEdit.findViewById(R.id.dialog_adresse_alles);
+                        final EditText person = (EditText) dEdit.findViewById(R.id.dialog_person_alles);
 
-                        kosten.setText("Kosten: " + Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
-                        beschreibung.setText("Beschreibung: " + allesArrayList.get(positionToRemove).getBeschreibung());
+                        kosten.setText(Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
+                        beschreibung.setText(allesArrayList.get(positionToRemove).getBeschreibung());
                         //datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
-                        art.setText("Art: " + allesArrayList.get(positionToRemove).getArt());
+                        art.setText(allesArrayList.get(positionToRemove).getArt());
 
                         int kostenArtPosition = CheckKostenart(allesArrayList.get(positionToRemove).getKostenart());
                         kostenart.setSelection(kostenArtPosition);
                         //kostenart.setText("Kostenart: " + allesArrayList.get(positionToRemove).getKostenart());
                         //kostenart.setSelection();
-                        ort.setText("Ort: " + allesArrayList.get(positionToRemove).getOrt());
-                        adresse.setText("Adresse: " + allesArrayList.get(positionToRemove).getAdresse());
-                        person.setText("Person: " + allesArrayList.get(positionToRemove).getPerson());
+                        ort.setText(allesArrayList.get(positionToRemove).getOrt());
+                        adresse.setText(allesArrayList.get(positionToRemove).getAdresse());
+                        person.setText(allesArrayList.get(positionToRemove).getPerson());
 
                         dEdit.show();
+
+                        Button modifyB = (Button) dEdit.findViewById(R.id.dialog_add_alles);
+                        Button cancelModifyB = (Button) dEdit.findViewById(R.id.dialog_cancel_alles);
+                        final String modDatum = allesArrayList.get(positionToRemove).getDatum();
+
+
+                        modifyB.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String modKosten = kosten.getText().toString();
+                                String modBeschreibung = beschreibung.getText().toString();
+                                String modArt = art.getText().toString();
+                                //String modKostenArts= kostenartAlles.getText().toString();
+                                String modOrt = ort.getText().toString();
+                                String modAdresse = adresse.getText().toString();
+                                String modPerson = person.getText().toString();
+
+                                String modKostenArt = kostenart.getSelectedItem().toString();
+
+                                Alles alles = new Alles(Integer.parseInt(modKosten), modBeschreibung, modDatum, modArt, modKostenArt, modOrt, modAdresse, modPerson );
+                                dbHandler.modifyProduct(alles);
+                                RefreshListviews();
+                                dEdit.cancel();
+                            }
+                        });
+
+                        cancelModifyB.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dEdit.cancel();
+                            }
+                        });
                     }
                 });
 

@@ -117,6 +117,21 @@ public class AllesDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_ALLES + " WHERE " + COLUMN_Beschreibung + "=\"" + productName + "\";");
     }
+    public void modifyProduct(Alles product){
+        SQLiteDatabase db = getWritableDatabase();
+
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_Kosten, product.getKosten());
+        values.put(COLUMN_Beschreibung, product.getBeschreibung());
+        values.put(COLUMN_Datum, product.getDatum());
+        values.put(COLUMN_Art, product.getArt()); //Datentyp Enum, returnt aber String
+        values.put(COLUMN_Kostenart, product.getKostenart()); //Datentyp Enum, returnt aber String
+        values.put(COLUMN_Ort,product.getOrt());
+        values.put(COLUMN_Adresse,product.getAdresse());
+        values.put(COLUMN_Person,product.getPerson());
+        db.update(TABLE_ALLES,values,COLUMN_Beschreibung + " = " + product.getBeschreibung(),null);
+    }
 
     public Cursor getAllRows(){
         SQLiteDatabase db = getWritableDatabase();
