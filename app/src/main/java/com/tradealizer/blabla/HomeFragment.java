@@ -1,5 +1,11 @@
 package com.tradealizer.blabla;
 
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.app.Dialog;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -44,9 +50,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-
-{
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class HomeFragment extends Fragment {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -54,146 +61,88 @@ public class MainActivity extends AppCompatActivity
     private Toolbar mToolbar;
 
     private FragmentTransaction fragmentTransaction;
-   private NavigationView navigationView;
+    private NavigationView navigationView;
+
+    Button BtnAlles;
+    Button BtnKosten;
+    Button BtnBeschreibung;
+
+    FloatingActionButton AddFB;
 
 
-//    TextView gesamtkosten;
-      //TextView myText;
-  //  AllesDBHandler dbHandler;
-   // private static final String TAG = "MainClass";
-   // int activeView = 2;
-
+    TextView gesamtkosten;
+    //TextView myText;
+    AllesDBHandler dbHandler;
+    private static final String TAG = "MainClass";
+    int activeView = 2;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-   // private GoogleApiClient client;
+    private GoogleApiClient client;
+
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
 
-        //Navigation Settings
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mToolbar = (Toolbar) findViewById(R.id.nav_action);
-        setSupportActionBar(mToolbar);
+        gesamtkosten = (TextView) v.findViewById(R.id.tv_gesamtkosten);
+        //myText =(TextView)findViewById(R.id.myText);
+        // dbHandler = new AllesDBHandler(this, null, null, 1);
+        dbHandler = new AllesDBHandler(getActivity(), null, null, 1);
+        printDatabase();
+        Log.d(TAG, "Vor populate ");
+     //  populateListView2();
+// client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        client = new GoogleApiClient.Builder(getActivity()).addApi(AppIndex.API).build();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.bringToFront();
+        BtnAlles = (Button)v.findViewById(R.id.button_All);
+        BtnKosten = (Button)v.findViewById(R.id.button_Kosten);
+        BtnBeschreibung = (Button)v.findViewById(R.id.button_Pur);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        AddFB = (FloatingActionButton) v.findViewById(R.id.addFB);
 
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-
-        mDrawerLayout.setDrawerListener(mToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main_container,new HomeFragment());
-        fragmentTransaction.commit();
-
-
-        navigationView = (NavigationView)findViewById(R.id.navigation_view);
-     //   navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        AddFB.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.nav_home: {
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new HomeFragment());
-                        fragmentTransaction.commit();
-
-                        item.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        break;
-                    }
-
-                    case R.id.nav_settings:{
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new SettingFragment());
-                        fragmentTransaction.commit();
-                        item.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-
-                        break;}
-
-                    case R.id.nav_aboutus:{
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new AboutusFragment());
-                        fragmentTransaction.commit();
-                        item.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        break;}
-
-
-                }
-
-                return false;
-
+            public void onClick(View v) {
+                addFBClicked(v);
             }
+        });
 
+        BtnAlles.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Button_AllClicked(v);
+            }
+        });
+        BtnKosten.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Button_KostenClicked(v);
+            }
+        });
+        BtnBeschreibung.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Button_PurClicked(v);
+            }
         });
 
 
-
-/*
-
-        gesamtkosten = (TextView) findViewById(R.id.tv_gesamtkosten);
-        //myText =(TextView)findViewById(R.id.myText);
-        dbHandler = new AllesDBHandler(this, null, null, 1);
-        printDatabase();
-        Log.d(TAG, "Vor populate ");
-        populateListView2();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        */
+        return v;
     }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mToggle.syncState();
-    }
-
-    @Override
-    public void onBackPressed() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mToggle.onConfigurationChanged(new Configuration());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mToggle.onOptionsItemSelected(item)) {
-            return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-
-
-    }
-/*
-
-
     public void addFBClicked(View v) {
         Log.d(TAG, "Methode wird ausgeführt");
 
-        FloatingActionButton addEntry = (FloatingActionButton) findViewById(R.id.addFB);
-        final Dialog d = new Dialog(MainActivity.this);
+        FloatingActionButton addEntry = (FloatingActionButton) v.findViewById(R.id.addFB);
+
+        final Dialog d = new Dialog(/*MainActivity.this*/ getActivity());
         d.setTitle("Hinzufuegen");
         d.setContentView(R.layout.insert_dialog_kosten);
         d.show();
@@ -209,19 +158,20 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 String dKosten = kosten.getText().toString();
                 String dBeschreibung = beschreibung.getText().toString();
-                Toast.makeText(getApplicationContext(), "Eingegebene Kosten: " + dKosten, Toast.LENGTH_SHORT).show();
+                //getApplicationContext()
+                Toast.makeText(getContext().getApplicationContext(), "Eingegebene Kosten: " + dKosten, Toast.LENGTH_SHORT).show();
                 d.cancel();
 
                 //urspruenglicher Add Button
-                        //Products product = new Products(myInput.getText().toString());
-                        //dbHandler.addProduct(product);
-                        //printDatabase();
+                        /* Products product = new Products(myInput.getText().toString());
+                        dbHandler.addProduct(product);
+                        printDatabase();*/
                 //myText.setText("Hallo");
-                        //Alles alles = new Alles(Integer.parseInt(myInput.getText().toString()),myBeschreibung.getText().toString());
-                        //dbHandler.addProduct(alles);
-                        //printDatabase();
+                        /*Alles alles = new Alles(Integer.parseInt(myInput.getText().toString()),myBeschreibung.getText().toString());
+                        dbHandler.addProduct(alles);
+                        printDatabase();
 
-                        //populateListView();
+                        populateListView();*/
 
                 Alles alles = new Alles(Integer.parseInt(dKosten), dBeschreibung);
                 dbHandler.addProduct(alles);
@@ -237,10 +187,10 @@ public class MainActivity extends AppCompatActivity
 
 
                 // uspruenglicher Delete Button
-                       //String inputText = myInput.getText().toString();
-                        //dbHandler.deleteProduct(inputText);
-                        //printDatabase();
-                        //populateListView();
+                       /* String inputText = myInput.getText().toString();
+                        dbHandler.deleteProduct(inputText);
+                        printDatabase();
+                        populateListView();*/
                 // muss von hier entfernt und in extra delete button gesetzt werden
             }
         });
@@ -248,7 +198,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 d.cancel();
-                final Dialog dAlles = new Dialog(MainActivity.this);
+                final Dialog dAlles = new Dialog(/*MainActivity.this*/ HomeFragment.this.getActivity());
                 dAlles.setTitle("Hinzufuegen");
                 dAlles.setContentView(R.layout.insert_dialog_all);
                 dAlles.show();
@@ -268,19 +218,19 @@ public class MainActivity extends AppCompatActivity
                 Button cancelBAlles = (Button) dAlles.findViewById(R.id.dialog_cancel_alles);
                 //Button alleB = (Button)d.findViewById(R.id.dialog_alle);
 
-                //final String s;
+                /*final String s;
 
-                //kostenartAlles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                  //  @Override
-                    //public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                      //  s = parent.getSelectedItem().toString();
-                    //}
+                kostenartAlles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        s = parent.getSelectedItem().toString();
+                    }
 
-                    //@Override
-                    //public void onNothingSelected(AdapterView<?> parent) {
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
 
-                    //}
-                //});
+                    }
+                });*/
 
                 submitBAlles.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -301,8 +251,8 @@ public class MainActivity extends AppCompatActivity
                         //Toast.makeText(getApplicationContext(), "Eingegebene Kostenart: " + dKostenArtAlles, Toast.LENGTH_SHORT).show();
 
 
-
-                        Toast.makeText(getApplicationContext(), "Eingegebene Kosten: " + dKostenAlles, Toast.LENGTH_SHORT).show();
+                                            //getApplicationContext()
+                        Toast.makeText(getContext().getApplicationContext(), "Eingegebene Kosten: " + dKostenAlles, Toast.LENGTH_SHORT).show();
                         dAlles.cancel();
 
                         Alles alles = new Alles(Integer.parseInt(dKostenAlles), dBeschreibungAlles, dDatumAlles, dArtAlles, dKostenArtAlles, dOrtAlles, dAdresseAlles, dPersonAlles );
@@ -322,8 +272,7 @@ public class MainActivity extends AppCompatActivity
         });
 
     }
-*/
-/*
+
 
     public void printDatabase() {
         String[] dbString = dbHandler.databaseToString();
@@ -332,12 +281,11 @@ public class MainActivity extends AppCompatActivity
         //myInput.setText("");
         gesamtkosten.setText("Gesamtkosten: " + dbString[1] + " €");
     }
-*/
-/*
+
     private void populateListView() {
         String[] from = new String[]{AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
         int[] to = new int[]{R.id.ID_Kosten, R.id.ID_Beschreibung};
-        ListView listv = (ListView) findViewById(R.id.listView);
+        ListView listv = (ListView) getView().findViewById(R.id.listView);
         int layout = R.layout.item_layout;
 
 
@@ -345,36 +293,32 @@ public class MainActivity extends AppCompatActivity
         //GridView funktioniert noch nicht!
         InstanceDataAdapter(from, to, listv, layout);
     }
-*/
-/*
+
     private void populateListView2() {
         String[] from = new String[]{AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung};
         int[] to = new int[]{R.id.ID_Kosten_kosten, R.id.ID_Beschreibung_kosten};
-        ListView listv = (ListView) findViewById(R.id.gridView_Kosten);
+        ListView listv = (ListView) getView().findViewById(R.id.gridView_Kosten);
         int layout = R.layout.item_layout_kosten;
 
 
         activeView = 2;
         InstanceDataAdapter(from, to, listv, layout);
     }
-*/
-/*
+
     private void populateListView3() {
         String[] from = new String[]{AllesDBHandler.COLUMN_Kosten};
         int[] to = new int[]{R.id.ID_Kosten_pur};
-        ListView listv = (ListView) findViewById(R.id.gridView_Pur);
+        ListView listv = (ListView) getView().findViewById(R.id.gridView_Pur);
         int layout = R.layout.item_layout_pur;
 
 
         activeView = 3;
         InstanceDataAdapter(from, to, listv, layout);
     }
-    */
-/*
     private void populateListViewAlle() {
         String[] from = new String[]{AllesDBHandler.COLUMN_Kosten, AllesDBHandler.COLUMN_Beschreibung, AllesDBHandler.COLUMN_Datum, AllesDBHandler.COLUMN_Art, AllesDBHandler.COLUMN_Kostenart, AllesDBHandler.COLUMN_Ort, AllesDBHandler.COLUMN_Adresse, AllesDBHandler.COLUMN_Person};
         int[] to = new int[]{R.id.ID_Kosten, R.id.ID_Beschreibung, R.id.ID_Datum, R.id.ID_Art, R.id.ID_Kostenart, R.id.ID_Ort, R.id.ID_Adresse, R.id.ID_Person};
-        ListView listv = (ListView) findViewById(R.id.listView);
+        ListView listv = (ListView) getView().findViewById(R.id.listView);
         int layout = R.layout.item_layout;
 
 
@@ -382,34 +326,33 @@ public class MainActivity extends AppCompatActivity
         //GridView funktioniert noch nicht!
         InstanceDataAdapter(from, to, listv, layout);
     }
-*/
-/*
+
     private void InstanceDataAdapter(String[] from, int[] to, ListView listv, int layout) {
         Cursor cursor = dbHandler.getAllRows();
-        SimpleCursorAdapter cursorAdapter;
-        cursorAdapter = new SimpleCursorAdapter(this, layout, cursor, from, to, 0);
+        SimpleCursorAdapter cursorAdapter;      //this
+        cursorAdapter = new SimpleCursorAdapter(getActivity(), layout, cursor, from, to, 0);
 
         listv.setVisibility(View.VISIBLE);
         listv.setAdapter(cursorAdapter);
 
 
         listv.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {      //MainActivity.this
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
                 adb.setTitle("Delete?");
                 adb.setMessage("Are you sure you want to delete " + position);
                 final int positionToRemove = position;
-                                                                                            //adb.setNegativeButton("Cancel", null);
-                                                                                            //adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                                                                                              //  public void onClick(DialogInterface dialog, int which) {
-                                                                                                //    MyDataObject.remove(positionToRemove);
-                                                                                                 //   adapter.notifyDataSetChanged();
-                                                                                                //}});
-                                                                                           // adb.show();
+                                                                                            /*adb.setNegativeButton("Cancel", null);
+                                                                                            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                                    MyDataObject.remove(positionToRemove);
+                                                                                                    adapter.notifyDataSetChanged();
+                                                                                                }});
+                                                                                            adb.show();*/
                 final ArrayList<Alles> allesArrayList = dbHandler.getArrayList();
 
-
-                final Dialog d = new Dialog(MainActivity.this);
+                                            //MainActivity.this
+                final Dialog d = new Dialog(getActivity());
                 d.setTitle("Details");
                 d.setContentView(R.layout.item_layout_dialog);
 
@@ -428,16 +371,16 @@ public class MainActivity extends AppCompatActivity
 
                 // Werte auf null checken!
 
-                //kosten.setText("Kosten: " + Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
-                //beschreibung.setText("Beschreibung: " + allesArrayList.get(positionToRemove).getBeschreibung());
-                //datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
-                //art.setText("Art: " + allesArrayList.get(positionToRemove).getArt());
-                //kostenart.setText("Kostenart: " + allesArrayList.get(positionToRemove).getKostenart());
-                //ort.setText("Ort: " + allesArrayList.get(positionToRemove).getOrt());
-                //adresse.setText("Adresse: " + allesArrayList.get(positionToRemove).getAdresse());
-                //person.setText("Person: " + allesArrayList.get(positionToRemove).getPerson());
+                /*kosten.setText("Kosten: " + Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
+                beschreibung.setText("Beschreibung: " + allesArrayList.get(positionToRemove).getBeschreibung());
+                datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
+                art.setText("Art: " + allesArrayList.get(positionToRemove).getArt());
+                kostenart.setText("Kostenart: " + allesArrayList.get(positionToRemove).getKostenart());
+                ort.setText("Ort: " + allesArrayList.get(positionToRemove).getOrt());
+                adresse.setText("Adresse: " + allesArrayList.get(positionToRemove).getAdresse());
+                person.setText("Person: " + allesArrayList.get(positionToRemove).getPerson());*/
 
-                 kosten.setText(Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
+                kosten.setText(Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
                 beschreibung.setText(allesArrayList.get(positionToRemove).getBeschreibung());
                 datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
                 art.setText(allesArrayList.get(positionToRemove).getArt());
@@ -459,7 +402,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
                         d.cancel();
-                        final Dialog dEdit = new Dialog(MainActivity.this);
+                        final Dialog dEdit = new Dialog(/*MainActivity.this*/getActivity());
                         dEdit.setTitle("Edit");
                         dEdit.setContentView(R.layout.insert_dialog_all);
 
@@ -529,12 +472,10 @@ public class MainActivity extends AppCompatActivity
                         RefreshListviews();
                     }
                 });
-        RefreshListviews();
+                RefreshListviews();
             }
         });
     }
-    */
-/*
     public void RefreshListviews(){
         EmptyAllGrids();
         printDatabase();
@@ -552,36 +493,34 @@ public class MainActivity extends AppCompatActivity
             populateListViewAlle();
         }
     }
-*/
-/*
-public int CheckKostenart(String s){
-    int position = 0;
-    switch (s) {
-        case "Bargeld":
-            break;
-        case "Kreditkarte":
-            position = 1;
-            break;
-        case "Bankomatkarte":
-            position = 2;
-            break;
-        case "Scheck":
-            position = 3;
-            break;
-        case "Essensmarken":
-            position = 4;
-            break;
-        case "Gold":
-            position = 5;
-            break;
+
+    public int CheckKostenart(String s){
+        int position = 0;
+        switch (s) {
+            case "Bargeld":
+                break;
+            case "Kreditkarte":
+                position = 1;
+                break;
+            case "Bankomatkarte":
+                position = 2;
+                break;
+            case "Scheck":
+                position = 3;
+                break;
+            case "Essensmarken":
+                position = 4;
+                break;
+            case "Gold":
+                position = 5;
+                break;
+        }
+        return position;
     }
-    return position;
-}
-*/
-/*
+
     public void Button_AllClicked(View v) {
-        //EmptyAllGrids();
-        //populateListView();
+        /*EmptyAllGrids();
+        populateListView();*/
         for (int i = 1; i < 11; i++) {
             Alles alles = new Alles(i, String.valueOf(i));
             dbHandler.addProduct(alles);
@@ -603,9 +542,9 @@ public int CheckKostenart(String s){
     }
 
     private void EmptyAllGrids() {
-        ListView gridVAll = (ListView) findViewById(R.id.listView);
-        ListView gridVKosten = (ListView) findViewById(R.id.gridView_Kosten);
-        ListView gridVPur = (ListView) findViewById(R.id.gridView_Pur);
+        ListView gridVAll = (ListView) getView().findViewById(R.id.listView);
+        ListView gridVKosten = (ListView) getView().findViewById(R.id.gridView_Kosten);
+        ListView gridVPur = (ListView) getView().findViewById(R.id.gridView_Pur);
 
         gridVAll.setAdapter(null);
         gridVKosten.setAdapter(null);
@@ -615,12 +554,11 @@ public int CheckKostenart(String s){
         gridVKosten.setVisibility(View.INVISIBLE);
         gridVPur.setVisibility(View.INVISIBLE);
     }
-*/
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-  /*
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Main Page") // TODO: Define a title for the content shown.
@@ -632,8 +570,7 @@ public int CheckKostenart(String s){
                 .setActionStatus(Action.STATUS_TYPE_COMPLETED)
                 .build();
     }
-*/
-  /*
+
     @Override
     public void onStart() {
         super.onStart();
@@ -653,5 +590,5 @@ public int CheckKostenart(String s){
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
-    */
+
 }
