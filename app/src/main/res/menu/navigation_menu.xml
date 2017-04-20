@@ -8,13 +8,21 @@
             android:icon="@mipmap/ic_home_black_24dp"
             android:title="Home" />
 
-    <item android:id="@+id/nav_settings"
-        android:icon="@mipmap/ic_settings_black_24dp"
-        android:title="Settings"/>
+        <item
+            android:id="@+id/nav_graph"
+            android:icon="@mipmap/ic_broken_image_black_24dp"
+            android:title="Graph" />
 
-    <item android:id="@+id/nav_aboutus"
-        android:icon="@mipmap/ic_info_black_24dp"
-        android:title="About us"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@mipmap/ic_settings_black_24dp"
+            android:title="Settings"/>
+
+        <item
+            android:id="@+id/nav_aboutus"
+            android:icon="@mipmap/ic_info_black_24dp"
+            android:title="About us"/>
+
     </group>
 
 

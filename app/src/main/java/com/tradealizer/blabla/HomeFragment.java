@@ -101,6 +101,7 @@ public class HomeFragment extends Fragment {
         dbHandler = new AllesDBHandler(getActivity(), null, null, 1);
         printDatabase();
         Log.d(TAG, "Vor populate ");
+
      //  populateListView2();
 // client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         client = new GoogleApiClient.Builder(getActivity()).addApi(AppIndex.API).build();
