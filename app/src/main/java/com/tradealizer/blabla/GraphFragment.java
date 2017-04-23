@@ -3,12 +3,14 @@ package com.tradealizer.blabla;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
@@ -18,9 +20,13 @@ import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 
 //import java.sql.Date;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.StreamHandler;
 
 
 /**
@@ -33,10 +39,12 @@ public class GraphFragment extends Fragment {
         // Required empty public constructor
     }
 AllesDBHandler dbhandler;
-Button Line_Chart;
+Button Bar_Chart_Button;
     BarGraphSeries<DataPoint> series;
     SQLiteDatabase sqLiteDatabase;
-    GraphView graph;
+
+   GraphView graph;
+
 
 
     @Override
@@ -48,13 +56,17 @@ Button Line_Chart;
 
         sqLiteDatabase = dbhandler.getReadableDatabase();
 
-        Line_Chart = (Button) v.findViewById(R.id.Line_Chart);
+        Bar_Chart_Button = (Button) v.findViewById(R.id.Bar_Chart);
 
         graph = (GraphView) v.findViewById(R.id.graph);
 
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
-        Line_Chart.setOnClickListener(new View.OnClickListener() {
+
+
+       graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+
+
+        Bar_Chart_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               Graphmaker();
@@ -76,19 +88,23 @@ Button Line_Chart;
         });
         graph.addSeries(series);
         */
-
-         series = new BarGraphSeries<DataPoint>(getData());
+        series = new BarGraphSeries<DataPoint>(getData());
+        series.setSpacing(50);
 
         graph.addSeries(series);
+
+
+
 
 
 
     }
 
 
+
     private DataPoint[] getData() {
         String[] columns = new String[]{AllesDBHandler.COLUMN_Datum, AllesDBHandler.COLUMN_Kosten};
-        Cursor cursor = sqLiteDatabase.query("alles",columns,null,null,null,null,null);
+        Cursor cursor = sqLiteDatabase.query("alles",columns,null,null,null,null,null,null);
 
         DataPoint[] dp = new DataPoint[cursor.getCount()];
 
@@ -97,6 +113,7 @@ Button Line_Chart;
             cursor.moveToNext();
             dp[i]=new DataPoint(cursor.getInt(0),cursor.getInt(1));
         }
+
 
 return dp;
 
