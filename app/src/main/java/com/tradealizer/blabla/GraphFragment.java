@@ -40,12 +40,12 @@ public class GraphFragment extends Fragment {
     }
 AllesDBHandler dbhandler;
 Button Bar_Chart_Button;
-    BarGraphSeries<DataPoint> series;
+    //BarGraphSeries<DataPoint> series;
     SQLiteDatabase sqLiteDatabase;
 
    GraphView graph;
 
-
+LineGraphSeries<DataPoint> series;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +63,9 @@ Button Bar_Chart_Button;
 
 
 
-       graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+
+
+       //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
 
         Bar_Chart_Button.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +81,7 @@ Button Bar_Chart_Button;
 
     public void Graphmaker(){
 
-       /* LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+      /*  LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, 1),
                 new DataPoint(1, 5),
                 new DataPoint(2, 3),
@@ -87,31 +89,44 @@ Button Bar_Chart_Button;
                 new DataPoint(4, 6)
         });
         graph.addSeries(series);
-        */
-        series = new BarGraphSeries<DataPoint>(getData());
-        series.setSpacing(50);
+*/
+        //series = new BarGraphSeries<DataPoint>(getData());
+        series = new LineGraphSeries<DataPoint>(getData());
+        //series.setSpacing(50);
+
+        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity())); // Damit x-Achse Datum versteht
+        //graph.getGridLabelRenderer().setNumHorizontalLabels(3);
+        //graph.setHorizontalScrollBarEnabled(true);
+
+        //graph.getGridLabelRenderer().setHumanRounding(false);
+
+        //graph.getViewport().setMinY(0);
+        graph.getViewport().setScrollable(true);
+
 
         graph.addSeries(series);
-
-
-
-
-
-
     }
 
 
 
     private DataPoint[] getData() {
+
         String[] columns = new String[]{AllesDBHandler.COLUMN_Datum, AllesDBHandler.COLUMN_Kosten};
         Cursor cursor = sqLiteDatabase.query("alles",columns,null,null,null,null,null,null);
 
         DataPoint[] dp = new DataPoint[cursor.getCount()];
+        cursor.moveToFirst();
 
+        int sum = 0;
         for (int i=0; i<cursor.getCount(); i++)
         {
+            sum +=  cursor.getInt(1);
+            String[] sep = cursor.getString(0).split("-");
+            Date d = new Date(Integer.parseInt(sep[0])-1900,Integer.parseInt(sep[1])-1,Integer.parseInt(sep[2])); // -1900 und -1 wegen daemlichem Konstruktor
+
+            //dp[i]=new DataPoint(d, cursor.getInt(1) );
+            dp[i]= new DataPoint(i,sum);
             cursor.moveToNext();
-            dp[i]=new DataPoint(cursor.getInt(0),cursor.getInt(1));
         }
 
 

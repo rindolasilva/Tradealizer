@@ -520,8 +520,6 @@ public class HomeFragment extends Fragment {
     }
 
     public void Button_AllClicked(View v) {
-        /*EmptyAllGrids();
-        populateListView();*/
         for (int i = 1; i < 11; i++) {
             Alles alles = new Alles(i, String.valueOf(i));
             dbHandler.addProduct(alles);
