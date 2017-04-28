@@ -113,18 +113,66 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="1">
-
-
-
-                <Button
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+                    <RadioButton
                         android:id="@+id/button_All"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
 
                         android:layout_weight="0.33"
-
+                        android:background="@drawable/radiobtn_selector"
+                        android:textColor="@drawable/radiobtn_textcolor_selector"
+                        android:button="@null"
                         android:text="Alles"
-                        android:textSize="10sp" />
+                        android:textSize="19dp" />
+
+                    <RadioButton
+                        android:id="@+id/button_Pur"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+
+                        android:layout_weight="0.33"
+                        android:background="@drawable/radiobtn_selector"
+                        android:textColor="@drawable/radiobtn_textcolor_selector"
+                        android:button="@null"
+
+                        android:text="Kosten"
+                        android:textSize="19dp" />
+
+                    <RadioButton
+                        android:id="@+id/button_Kosten"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+
+                        android:button="@null"
+                        android:layout_weight="0.33"
+                        android:background="@drawable/radiobtn_selector"
+                        android:textColor="@drawable/radiobtn_textcolor_selector"
+                        android:text="Beschreibung"
+                        android:textSize="19dp" />
+
+
+                </RadioGroup>
+<!--
+
+                <Button
+                    android:id="@+id/button_All"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="0.33"
+
+
+                    android:text="Alles"
+                    android:textSize="10sp" />
 
                     <Button
                         android:id="@+id/button_Pur"
@@ -145,7 +193,7 @@
 
                         android:text="Beschreibung"
                         android:textSize="10sp" />
-
+-->
 
     </LinearLayout>
 

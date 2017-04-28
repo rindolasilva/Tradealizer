@@ -94,7 +94,7 @@ LineGraphSeries<DataPoint> series;
         series = new LineGraphSeries<DataPoint>(getData());
         //series.setSpacing(50);
 
-        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity())); // Damit x-Achse Datum versteht
+      //  graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity())); // Damit x-Achse Datum versteht
         //graph.getGridLabelRenderer().setNumHorizontalLabels(3);
         //graph.setHorizontalScrollBarEnabled(true);
 
@@ -122,7 +122,7 @@ LineGraphSeries<DataPoint> series;
         {
             sum +=  cursor.getInt(1);
             String[] sep = cursor.getString(0).split("-");
-            Date d = new Date(Integer.parseInt(sep[0])-1900,Integer.parseInt(sep[1])-1,Integer.parseInt(sep[2])); // -1900 und -1 wegen daemlichem Konstruktor
+           Date d = new Date(Integer.parseInt(sep[0])-1900,Integer.parseInt(sep[1])-1,Integer.parseInt(sep[2])); // -1900 und -1 wegen daemlichem Konstruktor
 
             //dp[i]=new DataPoint(d, cursor.getInt(1) );
             dp[i]= new DataPoint(i,sum);
