@@ -13,21 +13,22 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textview2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-            android:text="Für weitere Informationen oder Rückfragen stehen wir Ihnen gerne persönlich zur Verfügung !
+        android:text="Für weitere Informationen oder Rückfragen stehen wir Ihnen gerne persönlich zur Verfügung !"
 
+        android:textColorLink="@color/common_google_signin_btn_text_light_default"
+        android:textSize="32sp"
+        android:gravity="center|bottom" />
+</LinearLayout>
 
-
-"
-
-            android:textColorLink="@color/common_google_signin_btn_text_light_default"
-            android:textSize="35sp"
-            android:gravity="bottom|center" />
 
         <ImageView
             android:id="@+id/imageView"
