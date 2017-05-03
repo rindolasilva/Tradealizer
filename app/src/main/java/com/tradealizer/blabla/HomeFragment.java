@@ -1,40 +1,27 @@
 package com.tradealizer.blabla;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.app.Dialog;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
@@ -178,7 +165,8 @@ public class HomeFragment extends Fragment {
                 dbHandler.addProduct(alles);
                 printDatabase();
 
-                populateListView();
+                //populateListView();
+                RefreshListviews();
             }
         });
         cancelB.setOnClickListener(new View.OnClickListener() {
@@ -260,7 +248,8 @@ public class HomeFragment extends Fragment {
                         dbHandler.addProduct(alles);
                         printDatabase();
 
-                        populateListView();
+                        //populateListView();
+                        RefreshListviews();
                     }
                 });
                 cancelBAlles.setOnClickListener(new View.OnClickListener() {
@@ -520,12 +509,12 @@ public class HomeFragment extends Fragment {
     }
 
     public void Button_AllClicked(View v) {
-        for (int i = 1; i < 11; i++) {
+       /* for (int i = 1; i < 11; i++) {
             Alles alles = new Alles(i, String.valueOf(i));
             dbHandler.addProduct(alles);
-        }
+        }*/
         EmptyAllGrids();
-        printDatabase();
+        //printDatabase();
         //populateListView();
         populateListViewAlle();
     }
