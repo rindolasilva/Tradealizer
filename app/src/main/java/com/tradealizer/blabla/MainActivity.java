@@ -121,8 +121,6 @@ public class MainActivity extends AppCompatActivity
                         break;
                     }
 
-
-
                     case R.id.nav_aboutus:{
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new AboutusFragment());
@@ -143,7 +141,6 @@ public class MainActivity extends AppCompatActivity
 
 
 /*
-
         gesamtkosten = (TextView) findViewById(R.id.tv_gesamtkosten);
         //myText =(TextView)findViewById(R.id.myText);
         dbHandler = new AllesDBHandler(this, null, null, 1);
@@ -183,16 +180,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mToggle.onOptionsItemSelected(item)) {
             return true;
-
         }
         return super.onOptionsItemSelected(item);
 
 
     }
 /*
-
-
-    public void addFBClicked(View v) {
+   public void addFBClicked(View v) {
         Log.d(TAG, "Methode wird ausgeführt");
 
         FloatingActionButton addEntry = (FloatingActionButton) findViewById(R.id.addFB);
