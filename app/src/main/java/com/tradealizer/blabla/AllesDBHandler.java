@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ public class AllesDBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "project.db";
     public static final String TABLE_ALLES = "alles";
     public static final String _id  = "_id";
+    //public static final String COLUMN_ID = "id";
     public static final String COLUMN_Kosten = "kosten";
     public static final String COLUMN_Beschreibung  = "beschreibung";
     public static final String COLUMN_Datum = "datum";
@@ -113,9 +113,9 @@ public class AllesDBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_ALLES, null, values);
         db.close();
     }
-    public void deleteProduct(String productName){
+    public void deleteProduct(int productName){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_ALLES + " WHERE " + COLUMN_Beschreibung + "=\"" + productName + "\";");
+        db.execSQL("DELETE FROM " + TABLE_ALLES + " WHERE " + _id + "=\"" + productName + "\";");
     }
     public void modifyProduct(Alles product){
         SQLiteDatabase db = getWritableDatabase();
@@ -150,6 +150,7 @@ public class AllesDBHandler extends SQLiteOpenHelper {
         do
         {
             String[] data = new String[9];
+            data[8]=c.getString(0);
             data[0]=c.getString(1);
             data[1]=c.getString(2);
             data[2] = c.getString(3);
@@ -166,7 +167,7 @@ public class AllesDBHandler extends SQLiteOpenHelper {
                 data[6] = c.getString(7);
                 data[7] = c.getString(8);
 
-                aAlles.add(new Alles(Integer.parseInt(data[0]),data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
+                aAlles.add(new Alles(Integer.parseInt(data[8]),Integer.parseInt(data[0]),data[1],data[2],data[3],data[4],data[5],data[6],data[7]));
             }
 
         } while (c.moveToNext());

@@ -1,8 +1,6 @@
 package com.tradealizer.blabla;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by Alex on 01.03.2017.
@@ -47,7 +45,7 @@ public class Alles {
         this.Beschreibung=Beschreibung;
         this.Datum = Datum;
     }
-    public Alles(int Kosten, String Beschreibung, String Art, String Kostenart, String Ort, String Adresse, String Person){
+    public Alles(int ID,int Kosten, String Beschreibung, String Art, String Kostenart, String Ort, String Adresse, String Person){
         this.Kosten=Kosten;
         this.Beschreibung=Beschreibung;
         this.Datum=Datum;
@@ -56,11 +54,12 @@ public class Alles {
         this.Ort=Ort;
         this.Adresse=Adresse;
         this.Person=Person;
+        this.ID=ID;
 
         Date ZwischenDatum = new Date(System.currentTimeMillis());
         this.Datum = ZwischenDatum.toString();
     }
-    public Alles(int Kosten, String Beschreibung, String Datum, String Art, String Kostenart, String Ort, String Adresse, String Person){
+    public Alles(int ID, int Kosten, String Beschreibung, String Datum, String Art, String Kostenart, String Ort, String Adresse, String Person){
         this.Kosten=Kosten;
         this.Beschreibung=Beschreibung;
         this.Datum=Datum;
@@ -69,6 +68,7 @@ public class Alles {
         this.Ort=Ort;
         this.Adresse=Adresse;
         this.Person=Person;
+        this.ID=ID;
     }
 
     public int getKosten() {

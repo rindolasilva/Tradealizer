@@ -244,7 +244,7 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(getContext().getApplicationContext(), "Eingegebene Kosten: " + dKostenAlles, Toast.LENGTH_SHORT).show();
                         dAlles.cancel();
 
-                        Alles alles = new Alles(Integer.parseInt(dKostenAlles), dBeschreibungAlles, dDatumAlles, dArtAlles, dKostenArtAlles, dOrtAlles, dAdresseAlles, dPersonAlles );
+                        Alles alles = new Alles(0, Integer.parseInt(dKostenAlles), dBeschreibungAlles, dDatumAlles, dArtAlles, dKostenArtAlles, dOrtAlles, dAdresseAlles, dPersonAlles );
                         dbHandler.addProduct(alles);
                         printDatabase();
 
@@ -405,6 +405,8 @@ public class HomeFragment extends Fragment {
                         final EditText adresse = (EditText) dEdit.findViewById(R.id.dialog_adresse_alles);
                         final EditText person = (EditText) dEdit.findViewById(R.id.dialog_person_alles);
 
+                        final int idDel = allesArrayList.get(positionToRemove).getID();
+
                         kosten.setText(Integer.toString(allesArrayList.get(positionToRemove).getKosten()));
                         beschreibung.setText(allesArrayList.get(positionToRemove).getBeschreibung());
                         //datum.setText(allesArrayList.get(positionToRemove).getDatum().toString());
@@ -438,7 +440,7 @@ public class HomeFragment extends Fragment {
 
                                 String modKostenArt = kostenart.getSelectedItem().toString();
 
-                                Alles alles = new Alles(Integer.parseInt(modKosten), modBeschreibung, modDatum, modArt, modKostenArt, modOrt, modAdresse, modPerson );
+                                Alles alles = new Alles(idDel, Integer.parseInt(modKosten), modBeschreibung, modDatum, modArt, modKostenArt, modOrt, modAdresse, modPerson );
                                 dbHandler.modifyProduct(alles);
                                 RefreshListviews();
                                 dEdit.cancel();
@@ -457,7 +459,7 @@ public class HomeFragment extends Fragment {
                 deleB.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getBeschreibung());
+                        dbHandler.deleteProduct(allesArrayList.get(positionToRemove).getID());
                         d.cancel();
                         RefreshListviews();
                     }
