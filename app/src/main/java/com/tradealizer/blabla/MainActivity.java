@@ -121,14 +121,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                     }
 
-                    case R.id.nav_settings:{
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new SettingFragment());
-                        fragmentTransaction.commit();
-                        item.setChecked(true);
-                        mDrawerLayout.closeDrawers();
 
-                        break;}
 
                     case R.id.nav_aboutus:{
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
