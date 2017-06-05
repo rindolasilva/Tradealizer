@@ -130,7 +130,7 @@ public class AllesDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_Ort,product.getOrt());
         values.put(COLUMN_Adresse,product.getAdresse());
         values.put(COLUMN_Person,product.getPerson());
-        db.update(TABLE_ALLES,values,COLUMN_Beschreibung + " = " + product.getBeschreibung(),null);
+        db.update(TABLE_ALLES,values,_id + " = " + product.getID(),null);
     }
 
     public Cursor getAllRows(){

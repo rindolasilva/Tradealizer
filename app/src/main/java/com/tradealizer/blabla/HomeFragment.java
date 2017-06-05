@@ -442,6 +442,7 @@ public class HomeFragment extends Fragment {
 
                                 Alles alles = new Alles(idDel, Integer.parseInt(modKosten), modBeschreibung, modDatum, modArt, modKostenArt, modOrt, modAdresse, modPerson );
                                 dbHandler.modifyProduct(alles);
+
                                 RefreshListviews();
                                 dEdit.cancel();
                             }
